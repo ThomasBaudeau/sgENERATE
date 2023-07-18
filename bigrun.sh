@@ -1,7 +1,7 @@
 #!/bin/bash
 
 var1=/home/baudeau/Documents/BenchMapL/ProjetSuede/sGenerate/result/final_COV_agregate.fastq
-
+a= pwd
 for f in *;
 	do mv $f 'final_COV_agregate.fastq.gz';
 	mv 'final_COV_agregate.fastq.gz' $var1 ;
@@ -16,6 +16,7 @@ for f in *;
 	tail -n+2 Periscope_mult/COV_periscope_novel_counts.csv >> finalresult/peri2/COV_periscope_novel_counts.csv;
 	rm -r Periscope;
 	rm -r Periscope_mult;
+	cd $a
 
 
 
