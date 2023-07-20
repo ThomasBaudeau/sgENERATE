@@ -9,7 +9,7 @@ for f in *;
 	do cp $f $var1;
 	mv $var1/$f 'final_COV_agregate.fastq.gz'  ;
 	cd ../Tool/sgENERATE/;
-	snakemake -c16 all --use-conda || exit;
+	snakemake -c16 all --use-conda ||(echo "Faut tout relancer" | mail -r bws@univ-lille.fr thomas.baudeau@univ-lille.fr -s "Plantage" ; exit);
 	rm -rf result;
 	mkdir result;
 	mv benchmarks/PeriscopeMult_COV.txt benchmarks/PeriscopeMult_COV_$f.txt;
@@ -22,4 +22,5 @@ for f in *;
 	rm -rf Periscope_mult;
 	cd $var2;
 done
-
+echo "FIN" | mail -r bws@univ-lille.fr thomas.baudeau@univ-lille.fr -s "FIN" ;
+echo "NADINE" | mail -r bws@univ-lille.fr antoine.limasset@gmail.com -s "NADINE" ;
