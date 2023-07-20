@@ -147,7 +147,7 @@ rule run_periscope_multi:
     conda:
         'env/perimult.yaml'
     benchmark:
-        "benchmarks/PeriscopeMult_{species}.txt
+        "benchmarks/PeriscopeMult_{species}.txt"
     shell:
         "periscope --fastq {input} --gff script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 8;rm Periscope_mult/COV.*"
 
