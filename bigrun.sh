@@ -4,10 +4,10 @@ var1=../Tool/sgENERATE/result
 var2=../../datasets/
 
 
-conda activate Snakemake;
+conda activate snakemake;
 for f in *;
-	do mv $f 'final_COV_agregate.fastq.gz';
-	mv 'final_COV_agregate.fastq.gz' $var1 ;
+	do cp $f $var1;
+	mv $var1/$f 'final_COV_agregate.fastq.gz'  ;
 	cd ../Tool/sgENERATE/;
 	snakemake -c16 all --use-conda || true;
 	rm -rf result;
