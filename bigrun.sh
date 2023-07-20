@@ -9,7 +9,7 @@ for f in *;
 	do cp $f $var1;
 	mv $var1/$f 'final_COV_agregate.fastq.gz'  ;
 	cd ../Tool/sgENERATE/;
-	snakemake -c16 all --use-conda || true;
+	snakemake -c16 all --use-conda || exit;
 	rm -rf result;
 	mkdir result;
 	mv benchmarks/PeriscopeMult_COV.txt benchmarks/PeriscopeMult_COV_$f.txt;
