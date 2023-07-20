@@ -7,7 +7,7 @@ var2=../../datasets/
 conda activate snakemake;
 for f in *;
 	do cp $f $var1;
-	mv $var1/$f 'final_COV_agregate.fastq.gz'  ;
+	mv $var1/$f final_COV_agregate.fastq.gz ;
 	cd ../Tool/sgENERATE/;
 	snakemake -c16 all --use-conda ||(echo "Faut tout relancer" | mail -r bws@univ-lille.fr thomas.baudeau@univ-lille.fr -s "Plantage" ; exit 0);
 	rm -rf result;
