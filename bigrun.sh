@@ -11,7 +11,7 @@ for f in *;
 	rm -r result;
 	mkdir result;
 	mv benchmarks/PeriscopeMult_COV.txt benchmarks/PeriscopeMult_COV_$f.txt;
-	mv benchmarks/Periscope_COV.txt benchmarks/Periscope_COV_$f.txt
+	mv benchmarks/Periscope_COV.txt benchmarks/Periscope_COV_$f.txt;
 	tail -n+2 Periscope/COV_periscope_counts.csv >> finalresult/peri/COV_periscope_counts.csv;
 	tail -n+2 Periscope/COV_periscope_novel_counts.csv >> finalresult/peri/COV_periscope_novel_counts.csv;
 	tail -n+2 Periscope_mult/COV_periscope_counts.csv >> finalresult/peri2/COV_periscope_counts.csv;
