@@ -2,14 +2,16 @@
 
 var1=../Tool/sgENERATE/result
 var2=../../datasets/
-
+count=0
+tt= ls |  wc -l 
 
 conda activate snakemake;
 for f in *;
 	do cp $f $var1;
+	count=$(($count+1))
 	mv $var1/$f $var1/final_COV_agregate.fastq ;
 	cd ../Tool/sgENERATE/;
-	snakemake -c16 all --use-conda ||(echo "Faut tout relancer" | mail -r bws@univ-lille.fr thomas.baudeau@univ-lille.fr -s "Plantage" ; exit 0);
+	snakemake -c1 all --use-conda ||(echo "Faut tout relancer" | mail -r bws@univ-lille.fr thomas.baudeau@univ-lille.fr -s "Plantage" ; exit 1);
 	rm -rf result;
 	mkdir result;
 	mv benchmarks/PeriscopeMult_COV.txt benchmarks/PeriscopeMult_COV_$f.txt;
@@ -21,6 +23,7 @@ for f in *;
 	rm -rf Periscope;
 	rm -rf Periscope_mult;
 	cd $var2;
-done
+	echo echo $count / $tt
+done ||exit 1
 echo "FIN" | mail -r bws@univ-lille.fr thomas.baudeau@univ-lille.fr -s "FIN" ;
 echo "NADINE" | mail -r bws@univ-lille.fr antoine.limasset@gmail.com -s "NADINE" ;

@@ -113,7 +113,7 @@ rule periscope:
         "benchmarks/Periscope_{species}.txt"
     shell:
         """
-        periscope --fastq {input} --technology ont --artic-primers V3 --output-prefix {wildcards.species} --threads 8;
+        periscope --fastq {input} --technology ont --artic-primers V3 --output-prefix {wildcards.species} --threads 18;
         mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
         mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
         mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
@@ -149,7 +149,7 @@ rule run_periscope_multi:
     benchmark:
         "benchmarks/PeriscopeMult_{species}.txt"
     shell:
-        "periscope --fastq {input} --gff script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 8;rm Periscope_mult/COV.*"
+        "periscope --fastq {input} --gff script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
 
 rule getnbread:
     input:
