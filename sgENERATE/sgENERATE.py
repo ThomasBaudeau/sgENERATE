@@ -27,7 +27,8 @@ def main():
         NB=args.cov,
         ER=args.er,
         REAL=args.real,
-        COMP=args.comp
+        COMP=args.comp,
+        path=scripts_dir
     )
 
     print(config)

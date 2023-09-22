@@ -1,8 +1,10 @@
+import os
+path=config.get('path')+'/'
+
 NB=config.get('NB')
 REAL=config.get('REAL')
 ER=config.get('ER')
 COMP=config.get('COMP')
-
 
 if COMP: 
     rule all:
@@ -24,30 +26,30 @@ def get_checkpoint_simu(wildcards):
 
 checkpoint generate_sgref:
     input:
-        "data/ref/{species}_ref.fna",
-        "data/SGtable/{species}_table"
+        path+"data/ref/{species}_ref.fna",
+        path+"data/SGtable/{species}_table"
     output:
         directory('result/sg_ref_{species}')  
     script:
-        'script/generate_sgRNA.py'
+        path+'script/generate_sgRNA.py'
 
 
 
 rule generate_amplicon:
     input:
-        ref="data/ref/{species}_ref.fna",
-        ampli="data/amplicon/artic_amplicons_V3.bed",
+        ref=path+"data/ref/{species}_ref.fna",
+        ampli=path+"data/amplicon/artic_amplicons_V3.bed",
         c=get_checkpoint_sg
     output:
         'result/{species}_multifastq.faa'
     script:
-        'script/generate_amplicon.py'
+        path+'script/generate_amplicon.py'
 
 if not REAL:
     checkpoint simu_phase:
         input:
             ref='result/{species}_multifastq.faa',
-            model="data/model/R103.model"
+            model=path+"data/model/R103.model"
         conda:
             "env/pbsim.yaml"
         output:
@@ -90,7 +92,7 @@ if not REAL:
         params:
             nb=NB
         script:
-            'script/agregate_amplicon.py'
+            path+'script/agregate_amplicon.py'
 else:
     rule make_graph: 
         input:

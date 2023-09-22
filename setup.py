@@ -6,7 +6,7 @@ setup(
     version=__version__,
     packages=['sgENERATE'],
     package_dir={'sgENERATE': 'sgENERATE'},
-    package_data={'sgENERATE':['recource']},
+    package_data={'sgENERATE':['recource/*','recource/data/*','recource/data/amplicon/*','recource/data/model/*','recource/data/ref/*','recource/data/SGtable/*','recource/env/*','recource/script/*']},
     url='',
     license='',
     author='Thomas.Baudeau',
