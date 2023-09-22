@@ -1,5 +1,17 @@
-NB=5000
-REAL=True
+NB=config.get('NB')
+REAL=config.get('REAL')
+ER=config.get('ER')
+COMP=config.get('COMP')
+
+
+if COMP: 
+    rule all:
+        input:
+            'result/final_COV_SG_ER.pdf'
+else:
+    rule all:
+        input:
+            'result/final_COV_agregate.fastq'
 
 def get_checkpoint_sg(wildcards):
     ck_output = checkpoints.generate_sgref.get(**wildcards).output[0]
@@ -43,7 +55,7 @@ if not REAL:
         params:
             number=NB,
             tsize=2000,
-            er='0.93',
+            er=ER,
             tmin= 2000,
             tmax= 2000
         shell:
@@ -120,9 +132,7 @@ rule periscope:
         rm COV*
         """ 
 
-rule all:
-    input:
-        'result/final_COV_SG_ER.pdf'
+
 
 
 rule run_minimap2:
