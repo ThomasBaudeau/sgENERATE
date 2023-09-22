@@ -13,12 +13,11 @@ setup(
     author='Thomas.Baudeau',
     author_email='thomas.baudeau@univ-lille.fr',
     description='sgENERATE create read sample mimicking ARTIC ONT data and benchmark tool for and quantifies sgRNAs in SARS-CoV-2',
+    include_package_data=True,
     entry_points={
         'console_scripts': [
             'sgENERATE = sgENERATE.__main__:main',
         ],
     },
-    install_requires=['snakemake']
-)
-    include_package_data=True,
+    install_requires=['snakemake'],
 )
