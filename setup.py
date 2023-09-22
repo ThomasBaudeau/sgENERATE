@@ -15,7 +15,7 @@ setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'sgENERATE = sgENERATE.__main__:main',
+            'sgENERATE = sgENERATE.sgENERATE:main',
         ],
     },
     install_requires=['snakemake'],

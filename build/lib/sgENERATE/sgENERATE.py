@@ -49,3 +49,5 @@ def main():
     else: 
         'error'
         exit(1)
+
+main()
