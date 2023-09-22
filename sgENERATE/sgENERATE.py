@@ -21,7 +21,7 @@ def main():
 
     # run snakemake pipeline 1st
     dir = os.path.join(os.path.dirname(__file__))
-    scripts_dir= dir
+    scripts_dir= os.path.join(dir, 'recource')
 
     config = dict(
         NB=args.cov,

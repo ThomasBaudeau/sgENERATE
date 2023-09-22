@@ -6,7 +6,7 @@ setup(
     version=__version__,
     packages=['sgENERATE'],
     package_dir={'sgENERATE': 'sgENERATE'},
-    package_data={'sgENERATE':['benchmarks/*','data/*','env/*','script/*']},
+    package_data={'sgENERATE':['recource']},
     url='',
     license='',
     author='Thomas.Baudeau',
