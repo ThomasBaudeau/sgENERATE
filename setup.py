@@ -1,13 +1,12 @@
 from setuptools import setup
-from periscope import __version__, _program
+from sgENERATE import __version__
 
 setup(
     name='sgENERATE',
     version=__version__,
     packages=['sgENERATE'],
-    packages=find_packages(),
-    package_dir={'periscope': 'periscope'},
-    package_data={'periscope':['resources/*']},
+    package_dir={'sgENERATE': 'sgENERATE'},
+    package_data={'sgENERATE':['benchmarks/*','data/*','env/*','script/*']},
     url='',
     license='',
     author='Thomas.Baudeau',
