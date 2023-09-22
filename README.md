@@ -2,16 +2,8 @@
 
 Snakemake pipeline to generate ONT read with sgRNA mimicking ARTIC protocol and to compare sgRNA finding tools 
 
+
 <h2>Install </h2>*
-
-**Installation**
-
-Clone the repository:
-
-<pre>
-git clone https://github.com/ThomasBaudeau/sgENERATE <br> 
-cd BenchMapL
-</pre>
 
 
 **Requirement**
@@ -20,7 +12,20 @@ cd BenchMapL
 * [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) <br> 
 
 
-## How to start with BenchMapL :
+**Installation**
+
+Clone the repository:
+
+<pre>
+git clone https://github.com/ThomasBaudeau/sgENERATE <br> 
+cd sgENERATE
+pip install .
+</pre>
+
+
+
+
+## How to start with sgENERATE :
 
 The different Tool implemented are :
 
@@ -29,16 +34,9 @@ The different Tool implemented are :
 
 
 
- ### BenchMapL Usage:
-
- #### Part1 : Data Generation Part
-
- #### Workflow : sgRNA Tool Comparaison Parts
-
-
-
- ### BenchMapL Configuration:
-
-#### Workflow : Adding a new configuration for a tool
-1. Open the config files and add a new command name in the __name__ field of the choosen tool. The name can not contains * character
-2. Add the command in the __command__ fields the name and the command position must be the same. 
+ ### sgENERATE Usage:
+ <pre>
+--coverage (default 5000)
+--error mean error rate of the generated samples (default 0.95 i.e 5% error)
+--compare  if true don't run the benchmark and only make the data generation (default false) 
+</pre>
