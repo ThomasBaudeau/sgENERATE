@@ -131,7 +131,6 @@ rule periscope:
         mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
         mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
         mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
-        mv {wildcards.species}_periscope.bam.bai Periscope/{wildcards.species}_periscope.bam.bai
         rm COV*
         """ 
 
