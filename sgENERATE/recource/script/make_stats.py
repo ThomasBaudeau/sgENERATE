@@ -197,9 +197,3 @@ try:
 except AttributeError:
     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
 
-newsam = open('newfasta.fasta','w')
-for i in TODEL['peri'].keys():
-    if i not in TODEL['peri2'].keys():
-        a=TODEL['peri'][i]
-        newsam.write('@'+a.qname+'\n')
-        newsam.write(a.seq+'\n')

@@ -64,4 +64,4 @@ def define_proportion(linput,nbread):
 
 
 
-main(snakemake.input['l'],snakemake.input['p'],snakemake.output['a'],snakemake.output['b'],snakemake.params['nb'])
+main(snakemake.input['l'],snakemake.input['p'],snakemake.output['a'],snakemake.output['b'],int(snakemake.params['nb']))
