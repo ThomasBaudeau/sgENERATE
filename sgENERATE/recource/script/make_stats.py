@@ -8,7 +8,7 @@ from matplotlib_venn import venn2_unweighted
 from matplotlib_venn import venn3_unweighted
 from math import sqrt
 
-
+os.environ["QT_QPA_PLATFORM"] = "wayland"
 TODEL={'peri':{},'peri2':{}}     
 
 def found_read_peri(peri,GPvein,key,lname):
@@ -57,7 +57,7 @@ def found_read_peri(peri,GPvein,key,lname):
 
 
 def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,file3=None):
-    os.environ["QT_QPA_PLATFORM"] = "xcb"
+
     sgcount={}
     sgname={}
     ttreads=int(open(nb,'r').readlines()[0])/4
