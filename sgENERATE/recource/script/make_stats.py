@@ -62,6 +62,7 @@ def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,
     sgname={}
     ttreads=int(open(nb,'r').readlines()[0])/4
     gpvein={'peri2':{},'GT':{},'peri':{}}
+    print('loading file')
     f1=open(file1,'r').readlines()
     f1p=open(file1mult,'r').readlines()
     f2=open(file2,'r').readlines()
