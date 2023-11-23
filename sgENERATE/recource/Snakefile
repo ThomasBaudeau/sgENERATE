@@ -80,7 +80,7 @@ if not REAL:
         conda:
             'env/pyt.yaml'
         script:
-            'script/make_stats.py'
+            path+'script/make_stats.py'
 
     rule agregate_read:
         input:
