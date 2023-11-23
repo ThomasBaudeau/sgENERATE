@@ -123,7 +123,7 @@ def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,
                 result['Periscope_multi'].append(0)
     if real:
         ttsgRna=ttsgRnaP 
-        print('data loaded')
+    print('data loaded')
     plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real)
 
 
