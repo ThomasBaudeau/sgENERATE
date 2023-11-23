@@ -22,7 +22,6 @@ def found_read_peri(peri,GPvein,key,lname):
     # aresult['ORF1ab']=0
     GPvein[lname]['non_canonical']=[]
     bamFP = pysam.AlignmentFile(peri, "rb")
-    newsam = open('newfasta.fasta','w')
     for read in bamFP:
         try:
             if not (read.tags[-1][1]=='gRNA' or read.tags[-2][1]=='gRNA'):
@@ -123,6 +122,7 @@ def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,
                 result['Periscope_multi'].append(0)
     if real:
         ttsgRna=ttsgRnaP 
+        print('data loaded')
     plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real)
 
 

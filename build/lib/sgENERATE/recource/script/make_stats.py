@@ -12,6 +12,7 @@ from math import sqrt
 TODEL={'peri':{},'peri2':{}}     
 
 def found_read_peri(peri,GPvein,key,lname):
+    
     # aresult={}
     for k in key:
         GPvein[lname][k]=[]
@@ -57,6 +58,7 @@ def found_read_peri(peri,GPvein,key,lname):
 
 
 def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,file3=None):
+    os.environ["QT_QPA_PLATFORM"] = "wayland"
     sgcount={}
     sgname={}
     ttreads=int(open(nb,'r').readlines()[0])/4
@@ -187,8 +189,10 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
                 v.get_label_by_id('C').set_text('periscope')
                 for text in v.set_labels:
                     text.set_fontsize(8)
-                axo.set_title(key)    
+                axo.set_title(key)
+        print('Saving plot')    
         fig.savefig(output,dpi=550.00,format='pdf')
+        
 #main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
 
 
