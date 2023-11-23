@@ -77,10 +77,8 @@ if not REAL:
             'result/final_{species}_SG_ER.pdf'
         conda:
             'env/pyt.yaml'
-        shell:
-            'touch {output}'
-        # script:
-        #     'script/make_stats.py'
+        script:
+            'script/make_stats.py'
 
     rule agregate_read:
         input:
