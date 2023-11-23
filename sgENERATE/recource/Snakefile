@@ -102,7 +102,7 @@ else:
             d2='Periscope_mult/{species}_periscope_novel_counts.csv',
             b='result/{species}_multifastq.faa',
             nbread='result/{species}_nbread.txt',
-            opt1='Periscope_mult/{species}_periscope.bam.bai'
+            opt1='Periscope_mult/{species}_periscope.bam.bai',
             opt2='Periscope/{species}_periscope.bam.bai'
         output:
             'result/final_{species}_SG_ER.pdf'
