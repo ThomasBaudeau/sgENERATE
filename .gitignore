@@ -1,0 +1,5 @@
+.snakemake/
+Periscope/
+Periscope_mult/
+result/
+benchmarks/

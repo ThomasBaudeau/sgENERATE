@@ -72,7 +72,9 @@ if not REAL:
             d2='Periscope_mult/{species}_periscope_novel_counts.csv',
             b='result/{species}_multifastq.faa',
             c='result/final_{species}_proportion.txt',
-            nbread='result/{species}_nbread.txt'
+            nbread='result/{species}_nbread.txt',
+            opt1='Periscope_mult/{species}_periscope.bam.bai',
+            opt2='Periscope/{species}_periscope.bam.bai'
         output:
             'result/final_{species}_SG_ER.pdf'
         conda:
@@ -129,6 +131,7 @@ rule periscope:
         mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
         mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
         mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
+        mv {wildcards.species}_periscope.bam.bai Periscope/{wildcards.species}_periscope.bam.bai
         rm COV*
         """ 
 
