@@ -136,9 +136,12 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
         x = np.arange(int(len(sgRna)))*(3+add)  # the label locations
         width = 1  # the width of the bars
         multiplier = 0
+        print('Saving plot')    
+        
         fig=plt.figure(figsize=(16,13))
         sfigs=fig.subfigures(2, 1,wspace=0.2,hspace=0.2)
-        
+        fig.savefig('a',dpi=300,format='pdf')
+        print('Saved plot')    
         (ax2,ax) = sfigs[0].subplots(1,2,gridspec_kw={'width_ratios': [1, 10]})
         # fig, (ax2,ax) = plt.subplots(1,2,figsize=(16, 6),gridspec_kw={'width_ratios': [1, 10]})
         # fig.subplots_adjust(bottom=0.1)
@@ -192,7 +195,7 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
                     text.set_fontsize(8)
                 axo.set_title(key)
         print('Saving plot')    
-        fig.savefig(output,dpi=550.00,format='pdf')
+        fig.savefig(output,dpi=300,format='pdf')
         
 #main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
 
