@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: sgENERATE
+Version: 1.0
+Summary: sgENERATE create read sample mimicking ARTIC ONT data and benchmark tool for and quantifies sgRNAs in SARS-CoV-2
+Home-page: 
+Author: Thomas.Baudeau
+Author-email: thomas.baudeau@univ-lille.fr

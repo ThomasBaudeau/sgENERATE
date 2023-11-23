@@ -1,0 +1,188 @@
+import os
+path=config.get('path')+'/'
+
+NB=config.get('NB')
+REAL=config.get('REAL')
+ER=config.get('ER')
+COMP=config.get('COMP')
+
+if COMP: 
+    rule all:
+        input:
+            'result/final_COV_SG_ER.pdf'
+else:
+    rule all:
+        input:
+            'result/final_COV_agregate.fastq'
+
+def get_checkpoint_sg(wildcards):
+    ck_output = checkpoints.generate_sgref.get(**wildcards).output[0]
+    return expand('result/sg_ref_{species}/{sample}.fasta',species=wildcards.species, sample=glob_wildcards(os.path.join(ck_output, "{sample}.fasta")).sample)
+
+def get_checkpoint_simu(wildcards):
+    ck_output = checkpoints.simu_phase.get(**wildcards).output[0]
+    return expand('result/pbsim2/{species}/simu_{nbsample}.fastq',species=wildcards.species, nbsample=glob_wildcards(os.path.join(ck_output, "simu_{nbsample}.fastq")).nbsample)
+
+
+checkpoint generate_sgref:
+    input:
+        path+"data/ref/{species}_ref.fna",
+        path+"data/SGtable/{species}_table"
+    output:
+        directory('result/sg_ref_{species}')  
+    script:
+        path+'script/generate_sgRNA.py'
+
+
+
+rule generate_amplicon:
+    input:
+        ref=path+"data/ref/{species}_ref.fna",
+        ampli=path+"data/amplicon/artic_amplicons_V3.bed",
+        c=get_checkpoint_sg
+    output:
+        'result/{species}_multifastq.faa'
+    script:
+        path+'script/generate_amplicon.py'
+
+if not REAL:
+    checkpoint simu_phase:
+        input:
+            ref='result/{species}_multifastq.faa',
+            model=path+"data/model/R103.model"
+        conda:
+            "env/pbsim.yaml"
+        output:
+            directory("result/pbsim2/{species}/")#temp("simu_{species}")
+        params:
+            number=NB,
+            tsize=2000,
+            er=ER,
+            tmin= 2000,
+            tmax= 2000
+        shell:
+            "mkdir {output};pbsim --depth {params.number} --prefix {output}/simu --length-mean {params.tsize} --length-min {params.tmin} --length-max {params.tmax} --accuracy-mean {params.er} --difference-ratio 23:31:46 --seed 1234 --hmm_model {input.model} {input.ref};rm {output}/*.maf;rm {output}/*.ref;"
+    rule make_graph: 
+        input:
+            a='Periscope/{species}_periscope_counts.csv',
+            peri='Periscope/{species}_periscope.bam',
+            d='Periscope/{species}_periscope_novel_counts.csv',
+            a2='Periscope_mult/{species}_periscope_counts.csv',
+            peri2='Periscope_mult/{species}_periscope.bam',
+            d2='Periscope_mult/{species}_periscope_novel_counts.csv',
+            b='result/{species}_multifastq.faa',
+            c='result/final_{species}_proportion.txt',
+            nbread='result/{species}_nbread.txt',
+            opt1='Periscope_mult/{species}_periscope.bam.bai',
+            opt2='Periscope/{species}_periscope.bam.bai'
+        output:
+            'result/final_{species}_SG_ER.pdf'
+        conda:
+            'env/pyt.yaml'
+        script:
+            'script/make_stats.py'
+
+    rule agregate_read:
+        input:
+            l=get_checkpoint_simu,
+            p='result/{species}_multifastq.faa',
+        output:
+            a='result/final_{species}_agregate.fastq',
+            b='result/final_{species}_proportion.txt'
+        params:
+            nb=NB
+        script:
+            path+'script/agregate_amplicon.py'
+else:
+    rule make_graph: 
+        input:
+            a='Periscope/{species}_periscope_counts.csv',
+            peri='Periscope/{species}_periscope.bam',
+            d='Periscope/{species}_periscope_novel_counts.csv',
+            a2='Periscope_mult/{species}_periscope_counts.csv',
+            peri2='Periscope_mult/{species}_periscope.bam',
+            d2='Periscope_mult/{species}_periscope_novel_counts.csv',
+            b='result/{species}_multifastq.faa',
+            nbread='result/{species}_nbread.txt',
+            opt1='Periscope_mult/{species}_periscope.bam.bai',
+            opt2='Periscope/{species}_periscope.bam.bai'
+        output:
+            'result/final_{species}_SG_ER.pdf'
+        conda:
+            'env/pyt.yaml'
+        script:
+            'script/make_stats.py'
+
+
+rule periscope:
+    input:
+        'result/final_{species}_agregate.fastq'
+    output:
+        'Periscope/{species}_periscope_counts.csv',
+        'Periscope/{species}_periscope_novel_counts.csv',
+        'Periscope/{species}_periscope.bam'
+    conda:
+        'env/peri.yaml'
+    benchmark:
+        "benchmarks/Periscope_{species}.txt"
+    shell:
+        """
+        periscope --fastq {input} --technology ont --artic-primers V3 --output-prefix {wildcards.species} --threads 18;
+        mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
+        mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
+        mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
+        mv {wildcards.species}_periscope.bam.bai Periscope/{wildcards.species}_periscope.bam.bai
+        rm COV*
+        """ 
+
+
+rule make_index_perm:
+    input:
+        'Periscope_mult/{species}_periscope.bam'
+    output:
+        'Periscope_mult/{species}_periscope.bam.bai'
+    shell:
+        'samtools index {input}'
+
+rule make_index_per:
+    input:
+        'Periscope/{species}_periscope.bam'
+    output:
+        'Periscope/{species}_periscope.bam.bai'
+    shell:
+        'samtools index {input}'
+
+
+rule run_minimap2:
+    input:
+        ref='result/{species}_multifastq.faa',
+        fastq='result/final_{species}_agregate.fastq'
+    output:
+        'result/minimap_{species}.bam'
+    conda:
+        'env/minimap2.yaml'
+    shell:
+        "minimap2 -ax map-ont --secondary=no -k 15  -w 1 -t 8 {input.ref} {input.fastq} | samtools sort - | samtools view -bh  > {output};samtools index {output}"
+        #minimap2 -ax splice -k 8 -w 1 -g 20000 -G 20000 -CO -uf --no-end-flt --splice-flank=no {input.ref} {input.fastq} | samtools sort - | samtools view -bh  > {output};samtools index {output}"
+
+rule run_periscope_multi:
+    input:
+        'result/final_{species}_agregate.fastq'
+    output:
+        'Periscope_mult/{species}_periscope_counts.csv',
+        'Periscope_mult/{species}_periscope_novel_counts.csv',
+        'Periscope_mult/{species}_periscope.bam'
+    conda:
+        'env/perimult.yaml'
+    benchmark:
+        "benchmarks/PeriscopeMult_{species}.txt"
+    shell:
+        "periscope --fastq {input} --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
+
+rule getnbread:
+    input:
+        'result/final_{species}_agregate.fastq'
+    output:
+        'result/{species}_nbread.txt'
+    shell:
+        'cat {input} | wc -l > {output}'

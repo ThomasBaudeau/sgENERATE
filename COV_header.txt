@@ -1,0 +1,6 @@
+@HD	VN:1.6	SO:coordinate
+@SQ	SN:MN908947.3	LN:29903
+@PG	ID:minimap2	PN:minimap2	VN:2.17-r941	CL:minimap2 -ax map-ont -k 15 -t 18 /home/baudeau/Documents/TThèse/ProjetSuede/sgENERATE/sgENERATE/.snakemake/conda/bf98cd375c87a79dc1b2a1406d686a79_/lib/python3.8/site-packages/periscope/resources/nCoV-2019.reference.fasta result/final_COV_agregate.fastq
+@PG	ID:samtools	PN:samtools	PP:minimap2	VN:1.16.1	CL:samtools sort -
+@PG	ID:samtools.1	PN:samtools	PP:samtools	VN:1.16.1	CL:samtools view -bh -
+@PG	ID:samtools.2	PN:samtools	PP:samtools.1	VN:1.16.1	CL:samtools view -H COV.bam
