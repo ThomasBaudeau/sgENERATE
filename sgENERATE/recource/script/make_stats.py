@@ -192,7 +192,7 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
                     text.set_fontsize(8)
                 axo.set_title(key)
         print('Saving plot')    
-        fig.savefig(output,dpi=550.00,format='pdf')
+        fig.savefig(output,dpi=550.00,format='jpg')
         
 #main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
 
