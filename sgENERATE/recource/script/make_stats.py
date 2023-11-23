@@ -138,7 +138,7 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
         multiplier = 0
         fig=plt.figure(figsize=(16,13))
         sfigs=fig.subfigures(2, 1,wspace=0.2,hspace=0.2)
-        
+       
         (ax2,ax) = sfigs[0].subplots(1,2,gridspec_kw={'width_ratios': [1, 10]})
         # fig, (ax2,ax) = plt.subplots(1,2,figsize=(16, 6),gridspec_kw={'width_ratios': [1, 10]})
         # fig.subplots_adjust(bottom=0.1)
@@ -174,6 +174,8 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
         a=int(sqrt(len(gpvein['peri2'].keys())))
         b=int(len(gpvein['peri2'].keys())/int(sqrt(len(gpvein['peri2'].keys()))))
         axs_bottom=sfigs[1].subplots(a,b)
+        print('Saving plot')    
+        fig.savefig('a',dpi=300,format='pdf')
         if real:
             for key,axo in zip(gpvein['peri2'].keys(),axs_bottom.flat):
                 v=venn2_unweighted([set(gpvein['peri2'][key]),set(gpvein['peri'][key])],ax=axo,set_colors=('coral', 'cornflowerblue'), alpha = 0.7)  
@@ -192,7 +194,7 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
                     text.set_fontsize(8)
                 axo.set_title(key)
         print('Saving plot')    
-        fig.savefig(output,dpi=550.00,format='jpg')
+        fig.savefig(output,dpi=300,format='pdf')
         
 #main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
 
