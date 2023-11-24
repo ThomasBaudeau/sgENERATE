@@ -8,7 +8,6 @@ from matplotlib_venn import venn2_unweighted
 from matplotlib_venn import venn3_unweighted
 from math import sqrt
 
-os.environ["QT_QPA_PLATFORM"] = "wayland"
 TODEL={'peri':{},'peri2':{}}     
 
 def found_read_peri(peri,GPvein,key,lname):

@@ -73,8 +73,6 @@ if not REAL:
             b='result/{species}_multifastq.faa',
             c='result/final_{species}_proportion.txt',
             nbread='result/{species}_nbread.txt',
-            opt1='Periscope_mult/{species}_periscope.bam.bai',
-            opt2='Periscope/{species}_periscope.bam.bai'
         output:
             'result/final_{species}_SG_ER.pdf'
         conda:
@@ -104,8 +102,6 @@ else:
             d2='Periscope_mult/{species}_periscope_novel_counts.csv',
             b='result/{species}_multifastq.faa',
             nbread='result/{species}_nbread.txt',
-            opt1='Periscope_mult/{species}_periscope.bam.bai',
-            opt2='Periscope/{species}_periscope.bam.bai'
         output:
             'result/final_{species}_SG_ER.pdf'
         conda:
@@ -135,21 +131,6 @@ rule periscope:
         """ 
 
 
-rule make_index_perm:
-    input:
-        'Periscope_mult/{species}_periscope.bam'
-    output:
-        'Periscope_mult/{species}_periscope.bam.bai'
-    shell:
-        'samtools index {input}'
-
-rule make_index_per:
-    input:
-        'Periscope/{species}_periscope.bam'
-    output:
-        'Periscope/{species}_periscope.bam.bai'
-    shell:
-        'samtools index {input}'
 
 
 rule run_minimap2:
