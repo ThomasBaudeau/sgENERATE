@@ -1,8 +1,10 @@
 name: sgENERATE
 channels:
+  - conda-forge
   - bioconda
   - defaults
 dependencies:
   - samtools=1.9
   - pip=20.0.2
+  - snakemake-minimal=5.13
 
