@@ -5,3 +5,4 @@ Summary: sgENERATE create read sample mimicking ARTIC ONT data and benchmark too
 Home-page: 
 Author: Thomas.Baudeau
 Author-email: thomas.baudeau@univ-lille.fr
+Requires-Dist: snakemake

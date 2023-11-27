@@ -4,7 +4,14 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - samtools=1.9
-  - pip=20.0.2
-  - snakemake-minimal=5.13
+  - samtools
+  - pip
+  - snakemake-minimal
+  - python = 3.8
+  - biopython
+  - matplotlib=3.8
+  - pysam=0.18.0
+  - upsetplot
+  - pandas
+  - matplotlib-venn
 

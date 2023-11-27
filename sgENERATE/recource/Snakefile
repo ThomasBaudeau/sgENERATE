@@ -75,8 +75,6 @@ if not REAL:
             nbread='result/{species}_nbread.txt',
         output:
             'result/final_{species}_SG_ER.pdf'
-        conda:
-            'env/pyt.yaml'
         script:
             path+'script/make_stats.py'
 
