@@ -7,10 +7,10 @@ dependencies:
   - samtools
   - pip
   - snakemake-minimal
-  - python = 3.8
+  - python
   - biopython
-  - matplotlib=3.8
-  - pysam=0.18.0
+  - matplotlib
+  - pysam
   - upsetplot
   - pandas
   - matplotlib-venn

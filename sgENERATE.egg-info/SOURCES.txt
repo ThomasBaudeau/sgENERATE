@@ -21,7 +21,6 @@ sgENERATE/recource/env/minimap2.yaml
 sgENERATE/recource/env/pbsim.yaml
 sgENERATE/recource/env/peri.yaml
 sgENERATE/recource/env/perimult.yaml
-sgENERATE/recource/env/pyt.yaml
 sgENERATE/recource/script/agregate_amplicon.py
 sgENERATE/recource/script/covid.gff
 sgENERATE/recource/script/generate_amplicon.py
