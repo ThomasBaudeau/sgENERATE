@@ -19,7 +19,7 @@ dependencies:
   - snakemake-minimal=5.13
   - pytest=5.4.2
   - pip=20.0.2
-  - setuptools=52.0.0
+  - setuptools==58
   - pyvcf=0.6.8
   - git
   - pip:
