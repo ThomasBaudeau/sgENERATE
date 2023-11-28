@@ -20,6 +20,7 @@ Clone the repository:
 git clone https://github.com/ThomasBaudeau/sgENERATE <br> 
 cd sgENERATE
 conda env create -f environment.yml
+conda activate sgENERATE
 pip install .
 </pre>
 
