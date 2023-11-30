@@ -1,6 +1,0 @@
-channels:
-  - bioconda
-  - r
-  - conda-forge
-dependencies:
-  - pbsim2
