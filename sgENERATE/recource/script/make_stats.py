@@ -134,13 +134,9 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
             add=0
         x = np.arange(int(len(sgRna)))*(3+add)  # the label locations
         width = 1  # the width of the bars
-        multiplier = 0
-        print('Saving plot')    
-        
+        multiplier = 0 
         fig=plt.figure(figsize=(16,13))
-        sfigs=fig.subfigures(2, 1,wspace=0.2,hspace=0.2)
-        fig.savefig('a',dpi=300,format='pdf')
-        print('Saved plot')    
+        sfigs=fig.subfigures(2, 1,wspace=0.2,hspace=0.2)   
         (ax2,ax) = sfigs[0].subplots(1,2,gridspec_kw={'width_ratios': [1, 10]})
         # fig, (ax2,ax) = plt.subplots(1,2,figsize=(16, 6),gridspec_kw={'width_ratios': [1, 10]})
         # fig.subplots_adjust(bottom=0.1)

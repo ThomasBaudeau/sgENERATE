@@ -6,7 +6,7 @@ REAL=config.get('REAL')
 ER=config.get('ER')
 COMP=config.get('COMP')
 
-if COMP: 
+if COMP=='True': 
     rule all:
         input:
             'result/final_COV_SG_ER.pdf'
