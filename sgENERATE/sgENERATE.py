@@ -12,6 +12,7 @@ def main():
     parser.add_argument('--error',dest='er' ,help='error rate of the samples',default=0.95,required=False)
     parser.add_argument('--real',dest='real',help='provide a real dataset for benching the tools',required=False,default=False)
     parser.add_argument('--compare',dest='comp', help='make also the comparaison',default='True',required=False)
+    parser.add_argument('--tool',dest='tool', help='make also the comparaison',default='minimap',required=False)
     #parser.add_argument('--artic-primers', dest='artic_primers', help='artic network primer version used:\n* V1 (default), V2, V3, V4\n* 2kb (for the UCL longer amplicons)\n* midnight (1.2kb midnight amplicons)\n* for custom primers provide path to amplicons file first and primers file second', nargs='*', default="V3")
 
 
@@ -28,6 +29,7 @@ def main():
         ER=args.er,
         REAL=args.real,
         COMP=args.comp,
+        tool=args.tool,
         path=scripts_dir
     )
 
