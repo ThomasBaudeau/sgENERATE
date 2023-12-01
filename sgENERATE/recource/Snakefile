@@ -154,7 +154,7 @@ rule run_periscope_multi:
     benchmark:
         "benchmarks/PeriscopeMult_{species}.txt"
     shell:
-        "periscope --fastq {input} --tool  --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
+        "periscope --fastq {input} --tool {params.tool}  --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
 
 rule getnbread:
     input:
