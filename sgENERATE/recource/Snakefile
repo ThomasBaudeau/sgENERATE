@@ -5,7 +5,6 @@ NB=config.get('NB')
 REAL=config.get('REAL')
 ER=config.get('ER')
 COMP=config.get('COMP')
-
 if COMP=='True': 
     rule all:
         input:
@@ -150,10 +149,12 @@ rule run_periscope_multi:
         'Periscope_mult/{species}_periscope.bam'
     conda:
         'env/perimult.yaml'
+    params:
+        tool=config.get('tool')
     benchmark:
         "benchmarks/PeriscopeMult_{species}.txt"
     shell:
-        "periscope --fastq {input} --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
+        "periscope --fastq {input} --tool  --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
 
 rule getnbread:
     input:
