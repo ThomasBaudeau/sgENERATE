@@ -135,6 +135,21 @@ if not REAL:
         shell:
             'cat {input.fastq} | wc -l > {output}'
 else:
+
+    rule make_graph: 
+            input:
+                a='Periscope/{species}_periscope_counts.csv',
+                peri='Periscope/{species}_periscope.bam',
+                d='Periscope/{species}_periscope_novel_counts.csv',
+                a2='Periscope_mult/{species}_periscope_counts.csv',
+                peri2='Periscope_mult/{species}_periscope.bam',
+                d2='Periscope_mult/{species}_periscope_novel_counts.csv',
+                b='result/{species}_multifastq.faa',
+                nbread='result/{species}_nbread.txt',
+            output:
+                'result/final_{species}_SG_ER.pdf'
+            script:
+                'script/make_stats.py'
     
     rule run_periscope_multi:
         input:
@@ -164,27 +179,13 @@ else:
 
             
     if config.get('tech')=='illumina':
-        rule make_graph: 
-            input:
-                a='Periscope/{species}_periscope_counts.csv',
-                peri='Periscope/{species}_periscope.bam',
-                d='Periscope/{species}_periscope_novel_counts.csv',
-                a2='Periscope_mult/{species}_periscope_counts.csv',
-                peri2='Periscope_mult/{species}_periscope.bam',
-                d2='Periscope_mult/{species}_periscope_novel_counts.csv',
-                b='result/{species}_multifastq.faa',
-                nbread='result/{species}_nbread.txt',
-            output:
-                'result/final_{species}_SG_ER.pdf'
-            script:
-                'script/make_stats_illu.py'
         rule periscope:
             input:
                 fastq=config.get('fastq')
             output:
                 'Periscope/{species}_periscope_counts.csv',
                 'Periscope/{species}_periscope_novel_counts.csv',
-                'Periscope/{species}_periscope.bam'
+                '{species}.bam'
             params:
                 tech=config.get('tech')
             conda:
@@ -196,25 +197,26 @@ else:
                 periscope --fastq {input.fastq} --technology {params.tech} --artic-primers V3 --output-prefix {wildcards.species} --threads 18;
                 mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
                 mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
-                mv {wildcards.species}.bam Periscope/{wildcards.species}_periscope.bam
-                rm COV*
                 """ 
 
+            rule periscope_bam:
+                input:
+                    '{species}.bam'
+                output:
+                    'Periscope/{species}_periscope.bam'
+                params:
+                    search = path+'script/parse_bam_peri.py"
+                    bed=path+'data/SGtable/orf_start.bed'
+                conda:
+                    'env/peri.yaml'
+                shell:
+                    """
+                    python {param.search} --bam {input} --orf-bed {params.bed} --output-prefix {wildcards.species} --threads 18;
+                    mv {species}_periscope.bam Periscope/{species}_periscope.bam;
+                    rm COV*
+                    """ 
+
     else:
-        rule make_graph: 
-            input:
-                a='Periscope/{species}_periscope_counts.csv',
-                peri='Periscope/{species}_periscope.bam',
-                d='Periscope/{species}_periscope_novel_counts.csv',
-                a2='Periscope_mult/{species}_periscope_counts.csv',
-                peri2='Periscope_mult/{species}_periscope.bam',
-                d2='Periscope_mult/{species}_periscope_novel_counts.csv',
-                b='result/{species}_multifastq.faa',
-                nbread='result/{species}_nbread.txt',
-            output:
-                'result/final_{species}_SG_ER.pdf'
-            script:
-                'script/make_stats.py'
         rule periscope:
             input:
                 fastq=config.get('fastq')
@@ -236,6 +238,7 @@ else:
                 mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
                 rm COV*
                 """ 
+        
 
 
 
