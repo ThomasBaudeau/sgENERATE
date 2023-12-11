@@ -88,43 +88,154 @@ if not REAL:
             nb=NB
         script:
             path+'script/agregate_amplicon.py'
-else:
-    rule make_graph: 
+
+    rule run_periscope_multi:
         input:
-            a='Periscope/{species}_periscope_counts.csv',
-            peri='Periscope/{species}_periscope.bam',
-            d='Periscope/{species}_periscope_novel_counts.csv',
-            a2='Periscope_mult/{species}_periscope_counts.csv',
-            peri2='Periscope_mult/{species}_periscope.bam',
-            d2='Periscope_mult/{species}_periscope_novel_counts.csv',
-            b='result/{species}_multifastq.faa',
-            nbread='result/{species}_nbread.txt',
+            'result/final_{species}_agregate.fastq'
         output:
-            'result/final_{species}_SG_ER.pdf'
-        script:
-            'script/make_stats.py'
+            'Periscope_mult/{species}_periscope_counts.csv',
+            'Periscope_mult/{species}_periscope_novel_counts.csv',
+            'Periscope_mult/{species}_periscope.bam'
+        conda:
+            'env/perimult.yaml'
+        params:
+            tool=config.get('tool'),
+            tech=config.get('tech'),
+        benchmark:
+            "benchmarks/PeriscopeMult_{species}.txt"
+        shell:
+            "periscope --fastq {input} --tool {params.tool} --technology {params.tech} --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
+    rule periscope:
+        input:
+            'result/final_{species}_agregate.fastq'
+        output:
+            'Periscope/{species}_periscope_counts.csv',
+            'Periscope/{species}_periscope_novel_counts.csv',
+            'Periscope/{species}_periscope.bam'
+        params:
+            tech=config.get('tech')
+        conda:
+            'env/peri.yaml'
+        benchmark:
+            "benchmarks/Periscope_{species}.txt"
+        shell:
+            """
+            periscope --fastq {input} --technology {params.tech} --artic-primers V3 --output-prefix {wildcards.species} --threads 18;
+            mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
+            mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
+            mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
+            rm COV*
+            """ 
+            #
+    rule getnbread:
+        input:
+            'result/final_{species}_agregate.fastq'
+        output:
+            'result/{species}_nbread.txt'
+        shell:
+            'cat {input.fastq} | wc -l > {output}'
+else:
+    
+    rule run_periscope_multi:
+        input:
+            fastq=config.get('fastq')
+        output:
+            'Periscope_mult/{species}_periscope_counts.csv',
+            'Periscope_mult/{species}_periscope_novel_counts.csv',
+            'Periscope_mult/{species}_periscope.bam'
+        conda:
+            'env/perimult.yaml'
+        params:
+            tool=config.get('tool'),
+            tech=config.get('tech'),
+        benchmark:
+            "benchmarks/PeriscopeMult_{species}.txt"
+        shell:
+            "periscope --fastq {input.fastq} --tool {params.tool}  --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
+
+    rule getnbread:
+        input:
+            fastq=config.get('fastq')
+        output:
+            'result/{species}_nbread.txt'
+        shell:
+            'cat {input.fastq} | wc -l > {output}'
 
 
-rule periscope:
-    input:
-        'result/final_{species}_agregate.fastq'
-    output:
-        'Periscope/{species}_periscope_counts.csv',
-        'Periscope/{species}_periscope_novel_counts.csv',
-        'Periscope/{species}_periscope.bam'
-    conda:
-        'env/peri.yaml'
-    benchmark:
-        "benchmarks/Periscope_{species}.txt"
-    shell:
-        """
-        periscope --fastq {input} --technology ont --artic-primers V3 --output-prefix {wildcards.species} --threads 18;
-        mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
-        mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
-        mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
-        rm COV*
-        """ 
+            
+    if config.get('tech')=='illumina':
+        rule make_graph: 
+            input:
+                a='Periscope/{species}_periscope_counts.csv',
+                peri='Periscope/{species}_periscope.bam',
+                d='Periscope/{species}_periscope_novel_counts.csv',
+                a2='Periscope_mult/{species}_periscope_counts.csv',
+                peri2='Periscope_mult/{species}_periscope.bam',
+                d2='Periscope_mult/{species}_periscope_novel_counts.csv',
+                b='result/{species}_multifastq.faa',
+                nbread='result/{species}_nbread.txt',
+            output:
+                'result/final_{species}_SG_ER.pdf'
+            script:
+                'script/make_stats_illu.py'
+        rule periscope:
+            input:
+                fastq=config.get('fastq')
+            output:
+                'Periscope/{species}_periscope_counts.csv',
+                'Periscope/{species}_periscope_novel_counts.csv',
+                'Periscope/{species}_periscope.bam'
+            params:
+                tech=config.get('tech')
+            conda:
+                'env/peri.yaml'
+            benchmark:
+                "benchmarks/Periscope_{species}.txt"
+            shell:
+                """
+                periscope --fastq {input.fastq} --technology {params.tech} --artic-primers V3 --output-prefix {wildcards.species} --threads 18;
+                mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
+                mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
+                mv {wildcards.species}.bam Periscope/{wildcards.species}_periscope.bam
+                rm COV*
+                """ 
 
+    else:
+        rule make_graph: 
+            input:
+                a='Periscope/{species}_periscope_counts.csv',
+                peri='Periscope/{species}_periscope.bam',
+                d='Periscope/{species}_periscope_novel_counts.csv',
+                a2='Periscope_mult/{species}_periscope_counts.csv',
+                peri2='Periscope_mult/{species}_periscope.bam',
+                d2='Periscope_mult/{species}_periscope_novel_counts.csv',
+                b='result/{species}_multifastq.faa',
+                nbread='result/{species}_nbread.txt',
+            output:
+                'result/final_{species}_SG_ER.pdf'
+            script:
+                'script/make_stats.py'
+        rule periscope:
+            input:
+                fastq=config.get('fastq')
+            output:
+                'Periscope/{species}_periscope_counts.csv',
+                'Periscope/{species}_periscope_novel_counts.csv',
+                'Periscope/{species}_periscope.bam'
+            params:
+                tech=config.get('tech')
+            conda:
+                'env/peri.yaml'
+            benchmark:
+                "benchmarks/Periscope_{species}.txt"
+            shell:
+                """
+                periscope --fastq {input.fastq} --technology {params.tech} --artic-primers V3 --output-prefix {wildcards.species} --threads 18;
+                mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
+                mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
+                mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
+                rm COV*
+                """ 
 
 
 
@@ -137,29 +248,9 @@ rule run_minimap2:
     conda:
         'env/minimap2.yaml'
     shell:
-        "minimap2 -ax map-ont --secondary=no -k 15  -w 1 -t 8 {input.ref} {input.fastq} | samtools sort - | samtools view -bh  > {output};samtools index {output}"
+        "minimap2 -ax map-ont --secondary=no -k 15 -w 1 -t 8 {input.ref} {input.fastq} | samtools sort - | samtools view -bh  > {output};samtools index {output}"
         #minimap2 -ax splice -k 8 -w 1 -g 20000 -G 20000 -CO -uf --no-end-flt --splice-flank=no {input.ref} {input.fastq} | samtools sort - | samtools view -bh  > {output};samtools index {output}"
 
-rule run_periscope_multi:
-    input:
-        'result/final_{species}_agregate.fastq'
-    output:
-        'Periscope_mult/{species}_periscope_counts.csv',
-        'Periscope_mult/{species}_periscope_novel_counts.csv',
-        'Periscope_mult/{species}_periscope.bam'
-    conda:
-        'env/perimult.yaml'
-    params:
-        tool=config.get('tool')
-    benchmark:
-        "benchmarks/PeriscopeMult_{species}.txt"
-    shell:
-        "periscope --fastq {input} --tool {params.tool}  --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
 
-rule getnbread:
-    input:
-        'result/final_{species}_agregate.fastq'
-    output:
-        'result/{species}_nbread.txt'
-    shell:
-        'cat {input} | wc -l > {output}'
+
+

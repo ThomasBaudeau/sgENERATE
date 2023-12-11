@@ -14,8 +14,8 @@ def main():
     parser.add_argument('--compare',dest='comp', help='make also the comparaison',default='True',required=False)
     parser.add_argument('--tool',dest='tool', help='make also the comparaison',default='minimap',required=False)
     #parser.add_argument('--artic-primers', dest='artic_primers', help='artic network primer version used:\n* V1 (default), V2, V3, V4\n* 2kb (for the UCL longer amplicons)\n* midnight (1.2kb midnight amplicons)\n* for custom primers provide path to amplicons file first and primers file second', nargs='*', default="V3")
-
-
+    parser.add_argument('--technology', help='the sequencing technology used, either:\n*ont\n*illumina', default="ont")
+    parser.add_argument('--fastq',dest='fastq',help='if you already have a single fastq then you can use this flag instead, if illumina paired end separate fastq by space', nargs='+',required=False,default=['result/final_{species}_agregate.fastq'])
 
     args = parser.parse_args()
 
@@ -30,7 +30,9 @@ def main():
         REAL=args.real,
         COMP=args.comp,
         tool=args.tool,
-        path=scripts_dir
+        path=scripts_dir,
+        tech=args.technology,
+        fastq=args.fastq
     )
 
     print(config)
