@@ -22,8 +22,6 @@ def found_read_peri(peri,GPvein,key,lname):
     # aresult['ORF1ab']=0
     newsam=open('onlynoncanonical.fasta','w')
     GPvein[lname]['non_canonical']=[]
-    if lname=='peri':
-        return
     bamFP = pysam.AlignmentFile(peri, "rb")
     for read in bamFP:
         try:
@@ -42,9 +40,9 @@ def found_read_peri(peri,GPvein,key,lname):
                         # newsam.write(read.seq+'\n')
                         # TODEL[lname][read.qname]=read
                     else:
-                        GPvein[lname][read.tags[-1][1]].append(read)
-                        newsam.write('@'+read.qname+'\n')
-                        newsam.write(read.seq+'\n')
+                        GPvein[lname][read.tags[-1][1]].append(read.qname)
+                        if read.tags[-1][1]=='E':
+                            print(read.qname)
                         
         except:
             # GPvein[lname]['non_canonical'].append(read.qname)
@@ -204,9 +202,9 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
 #main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
 
 
-# try:            
-#     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'],file3=snakemake.input['c']) 
-# except AttributeError:
-#     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
+try:            
+    main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'],file3=snakemake.input['c']) 
+except AttributeError:
+    main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
 
-main("Periscope/COV_periscope_counts.csv", "result/COV_multifastq.faa", "Periscope/COV_periscope.bam", "Periscope/COV_periscope_novel_counts.csv", "Periscope_mult/COV_periscope_counts.csv", "Periscope_mult/COV_periscope.bam", "Periscope_mult/COV_periscope_novel_counts.csv",'result/final_COV_SG_ER.pdf' ,"result/COV_nbread.txt")
+# main("Periscope/COV_periscope_counts.csv", "result/COV_multifastq.faa", "Periscope/COV_periscope.bam", "Periscope/COV_periscope_novel_counts.csv", "Periscope_mult/COV_periscope_counts.csv", "Periscope_mult/COV_periscope.bam", "Periscope_mult/COV_periscope_novel_counts.csv",'result/final_COV_SG_ER.pdf' ,"result/COV_nbread.txt")

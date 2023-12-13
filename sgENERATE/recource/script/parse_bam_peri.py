@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-from periscope import __version__
-
 from Bio import pairwise2
 import pysam
 import argparse
@@ -278,7 +276,7 @@ def main(args):
     #get a list of bams:
     import glob
     files = glob.glob(args.output_prefix+".split.*.sam")
-
+    threads=args.threads
     result=[]
     for file in files:
         result.append([file,args])
@@ -286,7 +284,7 @@ def main(args):
     processed = multiprocessing(
         process_reads,
         args=result,
-        workers=int(18)
+        workers=int(threads)
     )
     # outbamfile.close()
     output_bams = [file+"_periscope_temp.bam" for file in files]
@@ -304,7 +302,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='periscopre: Search for sgRNA reads in artic network SARS-CoV-2 sequencing data')
     parser.add_argument('--bam', help='bam file',default="The bam file of full artic reads")
     parser.add_argument('--output-prefix',dest='output_prefix',help="Path to the output, e.g. <DIR>/<SAMPLE_NAME>")
-   
+    parser.add_argument('--threads',dest='threads',help="Path to the output, e.g. <DIR>/<SAMPLE_NAME>")
     parser.add_argument('--orf-bed', dest='orf_bed', help='The bed file with ORF start positions')
 
     logger = logging
