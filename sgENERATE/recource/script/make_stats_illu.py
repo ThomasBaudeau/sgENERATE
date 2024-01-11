@@ -10,6 +10,38 @@ from math import sqrt
 
 TODEL={'peri':{},'peri2':{}}     
 
+
+def tosave(peri,peri2):
+    
+    # open output bam with the header we just got
+    bamFP = pysam.AlignmentFile(peri, "rb")
+    bamFP2 = pysam.AlignmentFile(peri2, "rb")
+    bam_header1 = bamFP.header.copy().to_dict()
+    outbamfileperi = pysam.AlignmentFile('output_periscope.bam', "wb", header=bam_header1)
+    bam_header2 = bamFP2.header.copy().to_dict()
+    outbamfileperim = pysam.AlignmentFile('output_periscopem.bam', "wb", header=bam_header2)
+    for read in bamFP:
+        try:
+            if not (read.tags[-1][1]=='gRNA' or read.tags[-2][1]=='gRNA'):
+                if read.qname in TODEL['peri']:
+                    outbamfileperi.write(read)
+            else:
+                if read.qname in TODEL['peri']:
+                    outbamfileperi.write(read)
+        except:
+            pass
+    for read2 in bamFP2:
+        try:
+            if not (read2.tags[-1][1]=='gRNA' or read2.tags[-2][1]=='gRNA'):
+                if read2.qname in TODEL['peri']:
+                    outbamfileperim.write(read2)
+            else:
+                if read2.qname in TODEL['peri']:
+                    outbamfileperim.write(read2)
+        except:
+            pass
+    raise
+
 def found_read_peri(peri,GPvein,key,lname):
     
     # aresult={}
@@ -33,16 +65,24 @@ def found_read_peri(peri,GPvein,key,lname):
                         # if read.qname not in ok.keys():
                         #     ok[read.qname]=0
                         #     aresult[read.reference_name]+=1
-                        #     if lname!='peri':
+                        # if lname!='peri':
+                        #     TODEL[lname][read.qname]=read
+                        # else:
+                        #     if read.qname not in TODEL['peri']:
+                        #         TODEL[lname][read.qname]=read
+
                         #         print(pairwise2.align.localms('AACCAACTTTCGATCTCTTGTAGATCTGTTCT', read.seq, 2, -2, -10, -.1,score_only=True))
                         #         print(read.qname)
                         # newsam.write('@'+read.qname+'\n')
                         # newsam.write(read.seq+'\n')
-                        # TODEL[lname][read.qname]=read
+                        #
                     else:
                         GPvein[lname][read.tags[-1][1]].append(read.qname)
-                        if read.tags[-1][1]=='E':
-                            print(read.qname)
+                        if lname=='peri2':
+                            TODEL[lname][read.qname]=read
+                        else:
+                            if read.qname not in TODEL['peri2']:
+                                TODEL[lname][read.qname]=read
                         
         except:
             # GPvein[lname]['non_canonical'].append(read.qname)
@@ -112,8 +152,10 @@ def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,
     ttsgRna=0
     ttsgRnaP=0
     result={'Ground_truth':[],'Periscope':[],'Periscope_multi':[]}
-    found_read_peri(inperi,gpvein,list(sgcount.keys()),'peri')
     found_read_peri(inperi2,gpvein,list(sgcount.keys()),'peri2')
+    found_read_peri(inperi,gpvein,list(sgcount.keys()),'peri')
+    
+    tosave(inperi,inperi2)
     for key in sgcount.keys():
             sgRna.append(key)
             if len(sgcount[key])==3:
@@ -202,9 +244,12 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
 #main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
 
 
-try:            
-    main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'],file3=snakemake.input['c']) 
-except AttributeError:
-    main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
+# try:            
+#     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'],file3=snakemake.input['c']) 
+# except AttributeError:
+#     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
 
-# main("Periscope/COV_periscope_counts.csv", "result/COV_multifastq.faa", "Periscope/COV_periscope.bam", "Periscope/COV_periscope_novel_counts.csv", "Periscope_mult/COV_periscope_counts.csv", "Periscope_mult/COV_periscope.bam", "Periscope_mult/COV_periscope_novel_counts.csv",'result/final_COV_SG_ER.pdf' ,"result/COV_nbread.txt")
+#main("Periscope/COV_periscope_counts.csv", "result/COV_multifastq.faa", "Periscope/COV_periscope.bam", "Periscope/COV_periscope_novel_counts.csv", "Periscope_mult/COV_periscope_counts.csv", "Periscope_mult/COV_periscope.bam", "Periscope_mult/COV_periscope_novel_counts.csv",'result/final_COV_SG_ER.pdf' ,"result/COV_nbread.txt")
+a='../Result_longmini/'
+b='../Result_shortReadbwa/'
+main(a+"Periscope_mult/COV_periscope_counts.csv", "result/COV_multifastq.faa", a+"Periscope_mult/COV_periscope.bam", a+"Periscope_mult/COV_periscope_novel_counts.csv", b+"Periscope_mult/COV_periscope_counts.csv", b+"Periscope_mult/COV_periscope.bam", b+"Periscope_mult/COV_periscope_novel_counts.csv",'result/final_COV_SG_ER.pdf' ,"result/COV_nbread.txt")

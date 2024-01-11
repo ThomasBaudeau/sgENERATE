@@ -294,7 +294,8 @@ def main(args):
 
     # t2=time.time()
     # print("periscope.py time:", t2-t1)
-
+# print(os.getcwd())
+# process_reads(['output_periscope.bam','sgENERATE/recource/data/SGtable/orf_start.bed'])
 if __name__ == '__main__':
 
 
