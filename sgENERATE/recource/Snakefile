@@ -252,7 +252,7 @@ if REAL:
             output:
                 'result/{species}_nbread.txt'
             shell:
-                'cat {input.fastq} | wc -l > {output}'
+                'cat {input} | wc -l > {output}'
         rule make_graph: 
             input:
                 a='Periscope/{species}_periscope_counts.csv',
