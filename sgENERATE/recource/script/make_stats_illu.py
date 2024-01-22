@@ -241,15 +241,15 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
         print('Saving plot')    
         fig.savefig(output,dpi=300,format='pdf')
         
-#main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
+# main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
 
 
-# try:            
-#     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'],file3=snakemake.input['c']) 
-# except AttributeError:
-#     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
+try:            
+    main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'],file3=snakemake.input['c']) 
+except AttributeError:
+    main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
 
-#main("Periscope/COV_periscope_counts.csv", "result/COV_multifastq.faa", "Periscope/COV_periscope.bam", "Periscope/COV_periscope_novel_counts.csv", "Periscope_mult/COV_periscope_counts.csv", "Periscope_mult/COV_periscope.bam", "Periscope_mult/COV_periscope_novel_counts.csv",'result/final_COV_SG_ER.pdf' ,"result/COV_nbread.txt")
-a='../Result_longmini/'
-b='../Result_shortReadbwa/'
-main(a+"Periscope_mult/COV_periscope_counts.csv", "result/COV_multifastq.faa", a+"Periscope_mult/COV_periscope.bam", a+"Periscope_mult/COV_periscope_novel_counts.csv", b+"Periscope_mult/COV_periscope_counts.csv", b+"Periscope_mult/COV_periscope.bam", b+"Periscope_mult/COV_periscope_novel_counts.csv",'result/final_COV_SG_ER.pdf' ,"result/COV_nbread.txt")
+# main("Periscope/COV_periscope_counts.csv", "result/COV_multifastq.faa", "Periscope/COV_periscope.bam", "Periscope/COV_periscope_novel_counts.csv", "Periscope_mult/COV_periscope_counts.csv", "Periscope_mult/COV_periscope.bam", "Periscope_mult/COV_periscope_novel_counts.csv",'result/final_COV_SG_ER.pdf' ,"result/COV_nbread.txt")
+# # a='../Result_longmini/'
+# b='../Result_shortReadbwa/'
+# main(a+"Periscope_mult/COV_periscope_counts.csv", "result/COV_multifastq.faa", a+"Periscope_mult/COV_periscope.bam", a+"Periscope_mult/COV_periscope_novel_counts.csv", b+"Periscope_mult/COV_periscope_counts.csv", b+"Periscope_mult/COV_periscope.bam", b+"Periscope_mult/COV_periscope_novel_counts.csv",'result/final_COV_SG_ER.pdf' ,"result/COV_nbread.txt")
