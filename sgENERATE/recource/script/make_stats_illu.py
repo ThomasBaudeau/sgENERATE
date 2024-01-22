@@ -155,7 +155,7 @@ def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,
     found_read_peri(inperi2,gpvein,list(sgcount.keys()),'peri2')
     found_read_peri(inperi,gpvein,list(sgcount.keys()),'peri')
     
-    tosave(inperi,inperi2)
+    # tosave(inperi,inperi2)
     for key in sgcount.keys():
             sgRna.append(key)
             if len(sgcount[key])==3:
