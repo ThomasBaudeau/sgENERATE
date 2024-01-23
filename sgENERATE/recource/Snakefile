@@ -5,14 +5,23 @@ NB=config.get('NB')
 REAL=config.get('REAL')
 ER=config.get('ER')
 COMP=config.get('COMP')
-if COMP=='True': 
+MODE=config.get('mode')
+
+
+if MODE=='extraction':
     rule all:
         input:
-            'result/final_COV_SG_ER.pdf'
+            'result/non_COV_cano.fasta'
+
 else:
-    rule all:
-        input:
-            'result/final_COV_agregate.fastq'
+    if COMP=='True': 
+        rule all:
+            input:
+                'result/final_COV_SG_ER.pdf'
+    else:
+        rule all:
+            input:
+                'result/final_COV_agregate.fastq'
 
 def get_checkpoint_sg(wildcards):
     ck_output = checkpoints.generate_sgref.get(**wildcards).output[0]
@@ -268,7 +277,15 @@ if REAL:
             script:
                 'script/make_stats.py'
 
-
+rule extract_sgRNA:
+    input:
+        a='Periscope_mult/{species}_periscope.bam',
+        b='result/file_name.txt'
+    output:
+        'result/non_{species}_cano.fasta'
+    script:
+        'script/extract_ncsgRNA.py'
+          
 
 rule run_minimap2:
     input:

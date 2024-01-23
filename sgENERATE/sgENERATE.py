@@ -16,7 +16,7 @@ def main():
     #parser.add_argument('--artic-primers', dest='artic_primers', help='artic network primer version used:\n* V1 (default), V2, V3, V4\n* 2kb (for the UCL longer amplicons)\n* midnight (1.2kb midnight amplicons)\n* for custom primers provide path to amplicons file first and primers file second', nargs='*', default="V3")
     parser.add_argument('--technology', help='the sequencing technology used, either:\n*ont\n*illumina', default="ont")
     parser.add_argument('--fastq',dest='fastq',help='if you already have a single fastq then you can use this flag instead, if illumina paired end separate fastq by space', nargs='+',required=False,default=['result/final_{species}_agregate.fastq'])
-
+    parser.add_argument('--mode',dest='mode',help='use --mode extraction for extract all the non-canonical sgRNA',required=False,default=False)
     args = parser.parse_args()
 
 
@@ -32,7 +32,8 @@ def main():
         tool=args.tool,
         path=scripts_dir,
         tech=args.technology,
-        fastq=args.fastq
+        fastq=args.fastq,
+        mode=args.mode
     )
 
     print(config)
