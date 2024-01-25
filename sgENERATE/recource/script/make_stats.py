@@ -200,3 +200,7 @@ try:
 except AttributeError:
     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
 
+# a='../../../Expcompmappeur/BIOSIMU2/default/Periscope/'
+# b='../../../Expcompmappeur/BIOSIMU2/default/Periscope_mult/'
+# c='../../../Expcompmappeur/BIOSIMU2/default/result/'
+# main(a+"COV_periscope_counts.csv", c+"COV_multifastq.faa", a+"COV_periscope.bam", a+"COV_periscope_novel_counts.csv", b+"COV_periscope_counts.csv", b+"COV_periscope.bam", b+"COV_periscope_novel_counts.csv",c+'BIOSIMU_noLLQ.pdf' ,c+"COV_nbread.txt",c+'final_COV_proportion.txt')
