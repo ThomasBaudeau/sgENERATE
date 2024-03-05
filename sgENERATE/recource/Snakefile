@@ -115,7 +115,7 @@ if not REAL:
         benchmark:
             "benchmarks/PeriscopeMult_{species}.txt"
         shell:
-            "periscope --fastq {input} --tool {params.tool} --technology {params.tech} --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
+            "periscope_multi --fastq {input} --tool {params.tool} --technology {params.tech} --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
     rule periscope:
         input:
             'result/final_{species}_agregate.fastq'
@@ -164,7 +164,7 @@ if REAL:
         benchmark:
             "benchmarks/PeriscopeMult_{species}.txt"
         shell:
-            "periscope --fastq {input.fastq} --tool {params.tool}  --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
+            "periscope_multi --fastq {input.fastq} --tool {params.tool}  --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
 
     
 
