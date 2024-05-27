@@ -93,7 +93,7 @@ def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,
     if file3!=None:
         f3=open(file3,'r').readlines()
         for x in f3:
-            res=x.split('\t')
+            res=x.split('\t')[:-2]
             num=int(res[0].split('_')[1].replace('.fastq',''))
             sg=sgname[num]
             sgcount[sg][1]+=int(res[1])
@@ -195,12 +195,12 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
 #main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
 
 
-try:            
-    main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'],file3=snakemake.input['c']) 
-except AttributeError:
-    main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
+# try:            
+#     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'],file3=snakemake.input['c']) 
+# except AttributeError:
+#     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
 
-# a='../../../Expcompmappeur/BIOSIMU2/default/Periscope/'
-# b='../../../Expcompmappeur/BIOSIMU2/default/Periscope_mult/'
-# c='../../../Expcompmappeur/BIOSIMU2/default/result/'
-# main(a+"COV_periscope_counts.csv", c+"COV_multifastq.faa", a+"COV_periscope.bam", a+"COV_periscope_novel_counts.csv", b+"COV_periscope_counts.csv", b+"COV_periscope.bam", b+"COV_periscope_novel_counts.csv",c+'BIOSIMU_noLLQ.pdf' ,c+"COV_nbread.txt",c+'final_COV_proportion.txt')
+a='../../../Expcompmappeur/BIOSIMU2/default/Periscope/'
+b='../../../Expcompmappeur/BIOSIMU2/default/Periscope_mult/'
+c='../../../Expcompmappeur/BIOSIMU2/default/result/'
+main(a+"COV_periscope_counts.csv", c+"COV_multifastq.faa", a+"COV_periscope.bam", a+"COV_periscope_novel_counts.csv", b+"COV_periscope_counts.csv", b+"COV_periscope.bam", b+"COV_periscope_novel_counts.csv",c+'BIOSIMU_noLLQ.pdf' ,c+"COV_nbread.txt",c+'final_COV_proportion.txt')
