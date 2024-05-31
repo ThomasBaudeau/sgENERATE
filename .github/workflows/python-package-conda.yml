@@ -23,6 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         cwd
+        ls -l
         create -f environment.yml
         conda activate sgENERATE
         python -m pip install --upgrade pip
