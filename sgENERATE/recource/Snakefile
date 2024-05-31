@@ -71,7 +71,7 @@ if not REAL:
             tmin= 2000,
             tmax= 2000
         shell:
-            "mkdir {output};pbsim --depth {params.number} --prefix {output}/simu --length-mean {params.tsize} --length-min {params.tmin} --length-max {params.tmax} --accuracy-mean {params.er} --difference-ratio 23:31:46 --seed 1234 --hmm_model {input.model} {input.ref};rm {output}/*.maf;rm {output}/*.ref;"
+            "mkdir -p {output};pbsim --depth {params.number} --prefix {output}/simu --length-mean {params.tsize} --length-min {params.tmin} --length-max {params.tmax} --accuracy-mean {params.er} --difference-ratio 23:31:46 --seed 1234 --hmm_model {input.model} {input.ref};rm -f {output}/*.maf;rm -f {output}/*.ref;"
     rule make_graph: 
         input:
             a='Periscope/{species}_periscope_counts.csv',
@@ -115,7 +115,7 @@ if not REAL:
         benchmark:
             "benchmarks/PeriscopeMult_{species}.txt"
         shell:
-            "periscope_multi --fastq {input} --tool {params.tool} --technology {params.tech} --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
+            "periscope_multi --fastq {input} --tool {params.tool} --technology {params.tech} --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm -f Periscope_mult/COV.*"
     rule periscope:
         input:
             'result/final_{species}_agregate.fastq'
@@ -135,7 +135,7 @@ if not REAL:
             mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
             mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
             mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
-            rm COV*
+            rm -f COV*
             """ 
             #
         
@@ -164,7 +164,7 @@ if REAL:
         benchmark:
             "benchmarks/PeriscopeMult_{species}.txt"
         shell:
-            "periscope_multi --fastq {input.fastq} --tool {params.tool}  --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm Periscope_mult/COV.*"
+            "periscope_multi --fastq {input.fastq} --tool {params.tool}  --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm -f Periscope_mult/COV.*"
 
     
 
@@ -208,7 +208,7 @@ if REAL:
             shell:
                 """
                 python {params.search} --bam {input} --orf-bed {params.bed} --output-prefix {wildcards.species} --threads 18;
-                mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam;rm COV*
+                mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam;rm -f COV*
                 """ 
         rule getnbread:
             input:
@@ -253,7 +253,7 @@ if REAL:
                 mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
                 mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
                 mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
-                rm COV*
+                rm -f COV*
                 """ 
         rule getnbread:
             input:
