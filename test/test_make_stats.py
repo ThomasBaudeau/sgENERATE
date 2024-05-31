@@ -1,8 +1,8 @@
 from sgENERATE.recource.script.make_stats import found_read_peri,extract_csv_info
 import os
 
-path=__path__
-print(path)
+path=__file__
+print(__file__)
 a=path+'/Periscope/'
 b=path+'/Periscope_mult/'
 c=path+'/result/'
