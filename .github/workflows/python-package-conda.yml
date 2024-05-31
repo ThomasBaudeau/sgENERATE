@@ -57,6 +57,7 @@ jobs:
       shell: bash
       run: |
         conda install pytest
-        #todo pytest 
+        cd test 
+        pytest test_make_stats.py
        
     
