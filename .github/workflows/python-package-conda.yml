@@ -45,6 +45,14 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
+      shell: bash
       run: |
+        eval "$(${CONDA}/bin/conda shell.bash hook)"
+        # conda commands here, like activate
+        conda init
+        conda activate sgENERATE
+        sgENERATE
+        sgENERATE
         conda install pytest
         pytest
+    
