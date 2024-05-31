@@ -56,7 +56,9 @@ jobs:
     - name: Test with pytest
       shell: bash
       run: |
-        conda install pytest
+        conda init
+        conda activate sgENERATE
+        conda install pytest -y
         cd test 
         pytest test_make_stats.py
        
