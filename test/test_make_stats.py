@@ -1,8 +1,11 @@
 from sgENERATE.recource.script.make_stats import found_read_peri,extract_csv_info
 import os
-a='/Periscope/'
-b='/Periscope_mult/'
-c='/result/'
+
+path=__path__
+print(path)
+a=path+'/Periscope/'
+b=path+'/Periscope_mult/'
+c=path+'/result/'
 file1=a+"COV_periscope_counts.csv"
 file2=c+"COV_multifastq.faa"
 inperi=a+"COV_periscope.bam"
