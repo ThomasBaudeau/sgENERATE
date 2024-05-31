@@ -56,6 +56,7 @@ jobs:
     - name: Test with pytest
       shell: bash
       run: |
+        eval "$(${CONDA}/bin/conda shell.bash hook)"
         conda init
         conda activate sgENERATE
         conda install pytest -y
