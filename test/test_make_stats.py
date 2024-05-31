@@ -17,9 +17,9 @@ nb=c+"COV_nbread.txt"
 file3=c+'final_COV_proportion.txt'
 print(os.getcwd())
 if file3:
-    result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,file3)
+    result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb,file3)
 else:
-    result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult)
+    result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb)
 found_read_peri(inperi,gpvein,list(sgcount.keys()),'peri')
 found_read_peri(inperi2,gpvein,list(sgcount.keys()),'peri2') 
 
