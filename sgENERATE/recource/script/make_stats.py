@@ -69,7 +69,7 @@ def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,
     f4p=open(filenovelmult,'r').readlines()
     for lign in f1[1:]:
         l=lign.split(',')
-        sgcount[l[1]]=[int(l[5])+int(l[6])+int(l[7]),0,0]#
+        sgcount[l[1]]=[int(l[5])+int(l[6]),0,0]#
         gpvein['GT'][l[1]]=[]
     gpvein['GT']['non_canonical']=[]
     for lign in f1p[1:]:
@@ -192,15 +192,44 @@ def plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real):
         print('Saving plot')    
         fig.savefig(output,dpi=300,format='pdf')
         
-#main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
+# main('Periscope/COV_periscope_counts.csv',  'result/COV_multifastq.faa','Periscope/COV_periscope.bam', 'Periscope/COV_periscope_novel_counts.csv','Periscope_mult/COV_periscope_counts.csv','Periscope_mult/COV_periscope.bam','Periscope_mult/COV_periscope_novel_counts.csv','test.pdf','result/final_COV_proportion.txt') #, 
 
 
-# try:            
-#     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'],file3=snakemake.input['c']) 
-# except AttributeError:
-#     main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
+# def calc_f1score(gpvein):
+#     TP1=0
+#     FP1=0
+#     FN1=0
+#     TP2=0
+#     FP2=0
+#     FN2=0
+#     for key in gpvein['peri2'].keys():
+#         if key=='N*':
+#             continue
+#         curTP1=len(set(gpvein['peri'][key])&set(gpvein['GT'][key]))
+#         TP1+= len(set(gpvein['peri'][key])&set(gpvein['GT'][key]))
+#         FP1+=len(set(gpvein['peri'][key]))-curTP1
+#         FN1+=len(set(gpvein['GT'][key]))-curTP1
+#         curTP2=len(set(gpvein['peri2'][key])&set(gpvein['GT'][key]))
+#         TP2+= len(set(gpvein['peri2'][key])&set(gpvein['GT'][key]))
+#         FP2+=len(set(gpvein['peri2'][key]))-curTP2
+#         FN2+=len(set(gpvein['GT'][key]))-curTP2
+#     F11=TP1/(TP1+(0.5*(FN1+FP1)))
+#     F22=TP2/(TP2+(0.5*(FN2+FP2)))
+#     print('peri:')
+#     print(F11)
+#     print('perim')
+#     print(F22)
+#     raise
 
-a='../../../Expcompmappeur/BIOSIMU2/default/Periscope/'
-b='../../../Expcompmappeur/BIOSIMU2/default/Periscope_mult/'
-c='../../../Expcompmappeur/BIOSIMU2/default/result/'
-main(a+"COV_periscope_counts.csv", c+"COV_multifastq.faa", a+"COV_periscope.bam", a+"COV_periscope_novel_counts.csv", b+"COV_periscope_counts.csv", b+"COV_periscope.bam", b+"COV_periscope_novel_counts.csv",c+'BIOSIMU_noLLQ.pdf' ,c+"COV_nbread.txt",c+'final_COV_proportion.txt')
+try:            
+    main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'],file3=snakemake.input['c']) 
+except AttributeError:
+    main(snakemake.input['a'],snakemake.input['b'],snakemake.input['peri'],snakemake.input['d'],snakemake.input['a2'],snakemake.input['peri2'],snakemake.input['d2'],snakemake.output[0],snakemake.input['nbread'])
+
+
+# d='BIOSIMU2'
+# a='../../../../Expcompmappeur/'+d+'/default/Periscope/'
+# b='../../../../Expcompmappeur/'+d+'/default/Periscope_mult/'
+# c='../../../../Expcompmappeur/'+d+'/default/result/'
+# print(os.getcwd())
+# main(a+"COV_periscope_counts.csv", c+"COV_multifastq.faa", a+"COV_periscope.bam", a+"COV_periscope_novel_counts.csv", b+"COV_periscope_counts.csv", b+"COV_periscope.bam", b+"COV_periscope_novel_counts.csv",c+'ERR4_withLLQ.pdf' ,c+"COV_nbread.txt",c+'final_COV_proportion.txt')

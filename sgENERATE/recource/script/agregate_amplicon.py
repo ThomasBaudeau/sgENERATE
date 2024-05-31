@@ -45,22 +45,28 @@ def find_same_ampli(path):
 
 
 
-def define_proportion(linput,nbread):
+def define_proportion(linput,nbread,alea=True):
     tpnb=list(linput.keys())
     nb=int(nbread*0.01)
     print(nb,nbread)
-    tp=[]   
-    choice=len(tpnb)-(random.randint(3,(len(tpnb)-2)))
-    for _ in range(choice):
-        tpnb.remove(tpnb[random.randint(0,len(tpnb)-1)])
-    reste=100
-    for apath in tpnb:
-        choice=random.randint(int(reste*0.4),int(reste*0.75))
-        reste=reste-choice
-        if reste ==0:
-            reste= int(nb*0.008) 
-        tp.append((linput[apath],int(nb*(choice/100))))
-    return tp
+    tp=[]
+    if alea:   
+        choice=len(tpnb)-(random.randint(3,(len(tpnb)-2)))
+        for _ in range(choice):
+            tpnb.remove(tpnb[random.randint(0,len(tpnb)-1)])
+        reste=100
+        for apath in tpnb:
+            choice=random.randint(int(reste*0.4),int(reste*0.75))
+            reste=reste-choice
+            if reste ==0:
+                reste= int(nb*0.008) 
+            tp.append((linput[apath],int(nb*(choice/100))))
+        return tp
+    else:
+        choice=len(tpnb)
+        for apath in tpnb:
+            tp.append((linput[apath],int(100)))
+        return tp
 
 
 
