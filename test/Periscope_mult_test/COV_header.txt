@@ -1,0 +1,16 @@
+@HD	VN:1.6	SO:coordinate
+@SQ	SN:ORF1ab	LN:21955
+@SQ	SN:S	LN:4265
+@SQ	SN:ORF3a	LN:1272
+@SQ	SN:E	LN:688
+@SQ	SN:M	LN:1155
+@SQ	SN:ORF6	LN:784
+@SQ	SN:ORF7a	LN:808
+@SQ	SN:ORF7b	LN:568
+@SQ	SN:ORF8	LN:808
+@SQ	SN:N	LN:1680
+@SQ	SN:ORF10	LN:406
+@PG	ID:minimap2	PN:minimap2	VN:2.17-r941	CL:minimap2 -ax map-ont -k 15 -t 18 multi_ref.faa result/final_COV_agregate.fastq
+@PG	ID:samtools	PN:samtools	PP:minimap2	VN:1.16.1	CL:samtools sort -
+@PG	ID:samtools.1	PN:samtools	PP:samtools	VN:1.16.1	CL:samtools view -bh -
+@PG	ID:samtools.2	PN:samtools	PP:samtools.1	VN:1.16.1	CL:samtools view -H Periscope_mult/COV.bam
