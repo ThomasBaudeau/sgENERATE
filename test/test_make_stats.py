@@ -3,9 +3,9 @@ import os
 
 
 path= os.path.dirname(__file__)
-a=path+'/Periscope/'
-b=path+'/Periscope_mult/'
-c=path+'/result/'
+a=path+'/Periscope_test/'
+b=path+'/Periscope_mult_test/'
+c=path+'/result_test/'
 file1=a+"COV_periscope_counts.csv"
 file2=c+"COV_multifastq.faa"
 inperi=a+"COV_periscope.bam"
