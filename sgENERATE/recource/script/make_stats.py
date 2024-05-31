@@ -55,8 +55,7 @@ def found_read_peri(peri,GPvein,key,lname):
     return
 
 
-def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,file3=None):
-
+def extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,file3=None):
     sgcount={}
     sgname={}
     ttreads=int(open(nb,'r').readlines()[0])/4
@@ -105,23 +104,31 @@ def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,
     ttsgRna=0
     ttsgRnaP=0
     result={'Ground_truth':[],'Periscope':[],'Periscope_multi':[]}
-    found_read_peri(inperi,gpvein,list(sgcount.keys()),'peri')
-    found_read_peri(inperi2,gpvein,list(sgcount.keys()),'peri2')
     for key in sgcount.keys():
-            sgRna.append(key)
-            if len(sgcount[key])==3:
-                result['Ground_truth'].append(sgcount[key][1])  
-                ttsgRna+=sgcount[key][1]
-                result['Periscope'].append(sgcount[key][0])
-                ttsgRnaP+=sgcount[key][0]
-                result['Periscope_multi'].append(sgcount[key][2])
-            else:
-                result['Periscope'].append(sgcount[key][0])
-                ttsgRnaP+=sgcount[key][1]
-                result['Ground_truth'].append(0)
-                result['Periscope_multi'].append(0)
+        sgRna.append(key)
+        if len(sgcount[key])==3:
+            result['Ground_truth'].append(sgcount[key][1])  
+            ttsgRna+=sgcount[key][1]
+            result['Periscope'].append(sgcount[key][0])
+            ttsgRnaP+=sgcount[key][0]
+            result['Periscope_multi'].append(sgcount[key][2])
+        else:
+            result['Periscope'].append(sgcount[key][0])
+            ttsgRnaP+=sgcount[key][1]
+            result['Ground_truth'].append(0)
+            result['Periscope_multi'].append(0)
     if real:
-        ttsgRna=ttsgRnaP 
+        ttsgRna=ttsgRnaP
+    return result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname
+
+def main(file1,file2,inperi,filenovel,file1mult,inperi2,filenovelmult,output,nb,file3=None):
+
+    if file3:
+        result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,file3)
+    else:
+        result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult)
+    found_read_peri(inperi,gpvein,list(sgcount.keys()),'peri')
+    found_read_peri(inperi2,gpvein,list(sgcount.keys()),'peri2') 
     print('data loaded')
     plot_lsgrna(result,sgRna,gpvein,ttreads,ttsgRna,output,real)
 
