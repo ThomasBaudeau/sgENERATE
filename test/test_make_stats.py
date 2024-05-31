@@ -1,5 +1,5 @@
 from sgENERATE.recource.script.make_stats import found_read_peri,extract_csv_info
-
+import os
 a='/Periscope/'
 b='/Periscope_mult/'
 c='/result/'
@@ -12,7 +12,7 @@ inperi2=b+"COV_periscope.bam"
 filenovelmult=b+"COV_periscope_novel_counts.csv"
 nb=c+"COV_nbread.txt"
 file3=c+'final_COV_proportion.txt'
-
+print(os.getcwd())
 if file3:
     result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,file3)
 else:
