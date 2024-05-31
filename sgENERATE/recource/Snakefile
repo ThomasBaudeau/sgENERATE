@@ -86,7 +86,7 @@ if not REAL:
         output:
             'result/final_{species}_SG_ER.pdf'
         script:
-            path+'script/make_stats.py'
+            path+'script/run_make_stats.py'
 
     rule agregate_read:
         input:
@@ -275,7 +275,7 @@ if REAL:
             output:
                 'result/final_{species}_SG_ER.pdf'
             script:
-                'script/make_stats.py'
+                'script/run_make_stats.py'
 
 rule extract_sgRNA:
     input:
