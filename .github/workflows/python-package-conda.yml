@@ -51,8 +51,8 @@ jobs:
         # conda commands here, like activate
         conda init
         conda activate sgENERATE
-        sgENERATE
-        sgENERATE
+        sgENERATE --coverage 100 --error 0.86
+        sgENERATE --coverage 100 --error 0.86
     - name: Test with pytest
       shell: bash
       run: |
