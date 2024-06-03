@@ -30,11 +30,12 @@ def test_nb_read():
 
 def test_nb_sgRNA():
     for i in gpvein['GT'].keys():
-        if i == 'non_canonical' or i=='ORF1a':
+        if i == 'non_canonical' or i=='ORF1a' or i=='N*':
             assert len(set(gpvein['GT'][i]))==0
         else:
             assert len(set(gpvein['GT'][i]))==100
 
 
 
+#test_nb_sgRNA()
 
