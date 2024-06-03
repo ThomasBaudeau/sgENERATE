@@ -28,4 +28,11 @@ found_read_peri(inperi2,gpvein,list(sgcount.keys()),'peri2')
 
 def test_nb_read():
     print(int(ttreads),36988/4)
-    assert int(ttreads)==36988/2
+    assert int(ttreads)==36988/4
+
+def test_nb_sgRNA()
+    for i in gpvein['GT'].keys():
+        if i == 'non_canonical':
+            assert len(set(gpvein['GT'][i]))==0
+        else:
+            assert len(set(gpvein['GT'][i]))==100
