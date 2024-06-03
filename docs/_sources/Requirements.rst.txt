@@ -1,0 +1,34 @@
+Requirements
+============
+Operating Systems
+-----------------
+Supported
+~~~~~~~~~~~~~~~~~
+
+sgENERATE was made to work on the following systems:
+
+ * ubuntu-latest
+
+
+
+Python Versions
+-----------------
+
+Python version currently support:
+
+ * Python 3.9
+ * Python 3.8
+ * Python 3.7
+
+Other dependencies
+-------------------
+
+All dependencies are managed with conda
+
+
+.. WARNING::
+
+   In order to install sgENERATE conda needs to be installed.
+   see: `Conda documentation <https://conda.io/projects/conda/en/latest/user-guide/install/index.html>`_
+
+

@@ -1,0 +1,23 @@
+Installing
+===========
+
+Installing From Github
+----------------------
+
+.. WARNING::
+
+   In order to install sgENERATE conda needs to be installed.
+   see: `Conda documentation <https://conda.io/projects/conda/en/latest/user-guide/install/index.html>`_
+
+Clone the repository: ::
+
+   git clone https://github.com/ThomasBaudeau/sgENERATE
+   cd sgENERATE
+   
+Install sgENERATE: ::
+
+   conda env create -f environment.yml
+   conda activate sgENERATE
+   pip install .
+   
+too see how to run it: `Getting Started <https://thomasbaudeau.github.io/sgENERATE/Gstart.html>`_

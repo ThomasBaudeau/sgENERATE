@@ -1,0 +1,80 @@
+Getting Started
+================
+
+For installation see `Installing <https://thomasbaudeau.github.io/sgENERATE/installing.html>`_ documentation.
+
+simple run : ::
+
+   sgENERATE
+   
+Option:
+~~~~~~~ 
+
+command option :
+ 
+* ``-h`` or ``--help`` The help page in command line.
+* ``--coverage``. The coverage of the generated sample. The default value is ``--coverage 5000``. 
+
+exemple : ::
+
+   sgENERATE --coverage 1000 
+
+.. NOTE::
+
+   Value bigger than **99** expected
+
+* ``--error`` The mean error rate of the generated sample. The default value is ``--error 0.95`` (5% mean error rate) . 
+
+exemple : ::
+
+   sgENERATE --error 0.85
+
+.. NOTE::
+
+   Value are expected between and **0.70** **0.96**. The generation is based on pbsim2 and read better than 4% are not possible.
+
+
+* ``--compare`` Option to enable comparison between periscope and periscope_multi. The default value is ``--compare True``.If the user only want to generate a sample use --false 
+
+exemple : ::
+
+   sgENERATE --compare False
+
+.. NOTE::
+
+   Value bigger than **99** expected
+   
+* ``--real`` Option to enable comparison between periscope and periscope_multi on a provided dataset (holds up the generation of a generated samples). The default value is ``--real False``
+
+exemple : ::
+
+   sgENERATE --real True
+
+.. NOTE::
+
+   The option **must** be used with ``--fastq``
+
+   
+* ``--fastq`` path to provided sample 
+
+exemple : ::
+
+   sgENERATE --fastq PATH/tofile.fastq
+
+.. NOTE::
+
+   The option **must** be used with ``--real True``
+
+
+Other option:
+~~~~~~~~~~~~~~~ 
+
+.. WARNING::
+
+   These options have been designed to allow further testing during the paper writing process. They will not be maintained in future developments and may no longer work.
+
+* ``--tool`` option to make the comparaison with other mapper for periscope_multi (graphmap, bwa-mem or minimap2 with refined parameters)
+* ``--technology`` option to make the comparaison with other mapper on illumina data (illumina,ont)
+* ``--mode`` option to extract all non canonical sgRNA in ``result/non_COV_cano.fasta`` use ``--mode extraction``
+
+
