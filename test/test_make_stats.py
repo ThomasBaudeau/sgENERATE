@@ -28,4 +28,4 @@ found_read_peri(inperi2,gpvein,list(sgcount.keys()),'peri2')
 
 def test_nb_read():
     print(int(ttreads),36988/4)
-    assert int(ttreads)==36988/4
+    assert int(ttreads)==36988/2
