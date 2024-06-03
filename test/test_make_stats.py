@@ -1,6 +1,9 @@
 from sgENERATE.recource.script.make_stats import found_read_peri,extract_csv_info
 import os
 
+def test_nb_read(ttreads):
+    print(int(ttreads),36988/4)
+    assert int(ttreads)==36988/4
 
 path= os.path.dirname(__file__)
 a=path+'/Periscope_test/'
@@ -22,8 +25,6 @@ else:
     result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb)
 found_read_peri(inperi,gpvein,list(sgcount.keys()),'peri')
 found_read_peri(inperi2,gpvein,list(sgcount.keys()),'peri2') 
+test_nb_read(ttreads)
 
 
-def test_nb_read(ttreads):
-    print(int(ttreads),36988/4)
-    assert int(ttreads)==36988/4
