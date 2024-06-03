@@ -10,7 +10,7 @@ from math import sqrt
 
 TODEL={'peri':{},'peri2':{}}     
 
-def found_read_peri(peri,GPvein,key,lname):
+def found_read_peri(peri,GPvein,key,lname,LLQ=True):
     
     # aresult={}
     for k in key:
@@ -40,8 +40,8 @@ def found_read_peri(peri,GPvein,key,lname):
                         TODEL[lname][read.qname]=read
                     else:
                         GPvein[lname][read.tags[-1][1]].append(read.qname)
-                        # if read.tags[-2][1].split('_')[1]=='LLQ':
-                        #     GPvein[lname][read.tags[-1][1]].pop()
+                        if read.tags[-2][1].split('_')[1]=='LLQ' and not LLQ:
+                            GPvein[lname][read.tags[-1][1]].pop()
                         
         except:
             GPvein[lname]['non_canonical'].append(read.qname)
@@ -55,7 +55,7 @@ def found_read_peri(peri,GPvein,key,lname):
     return
 
 
-def extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb,file3=None):
+def extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb,file3=None,LLQ=True):
     sgcount={}
     sgname={}
     ttreads=int(open(nb,'r').readlines()[0])/4
@@ -68,7 +68,10 @@ def extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb,file3=None
     f4p=open(filenovelmult,'r').readlines()
     for lign in f1[1:]:
         l=lign.split(',')
-        sgcount[l[1]]=[int(l[5])+int(l[6]),0,0]#
+        if LLQ:
+            sgcount[l[1]]=[int(l[5])+int(l[6]),0,0]#
+        else:
+            sgcount[l[1]]=[int(l[5])+int(l[6])+int(l[7]),0,0]
         gpvein['GT'][l[1]]=[]
     gpvein['GT']['non_canonical']=[]
     for lign in f1p[1:]:

@@ -18,22 +18,54 @@ nb=c+"COV_nbread.txt"
 file3=c+'final_COV_proportion.txt'
 print(os.getcwd())
 if file3:
-    result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb,file3)
+    result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb,file3,LLQ=False)
 else:
-    result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb)
-found_read_peri(inperi,gpvein,list(sgcount.keys()),'peri')
-found_read_peri(inperi2,gpvein,list(sgcount.keys()),'peri2') 
+    result,gpvein,real,ttreads,ttsgRna,ttsgRnaP,sgcount,sgRna,sgname =extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb,LLQ=False)
+found_read_peri(inperi,gpvein,list(sgcount.keys()),'peri',LLQ=False)
+found_read_peri(inperi2,gpvein,list(sgcount.keys()),'peri2',LLQ=False) 
 
 def test_nb_read():
     print(int(ttreads),36988/4)
     assert int(ttreads)==36988/4
 
 def test_nb_sgRNA():
+    TTkeys=[]
     for i in gpvein['GT'].keys():
         if i == 'non_canonical' or i=='ORF1a' or i=='N*':
             assert len(set(gpvein['GT'][i]))==0
         else:
+            TTkeys.append(i)
             assert len(set(gpvein['GT'][i]))==100
+    for i in TTkeys:
+        if i == 'S':
+            assert len(set(gpvein['peri'][i]))==83
+            assert len(set(gpvein['peri2'][i]))==98
+        if i == 'ORF3a':
+            assert len(set(gpvein['peri'][i]))==95
+            assert len(set(gpvein['peri2'][i]))==98
+        if i == 'E':
+            assert len(set(gpvein['peri'][i]))==92
+            assert len(set(gpvein['peri2'][i]))==93
+        if i == 'M':
+            assert len(set(gpvein['peri'][i]))==87
+            assert len(set(gpvein['peri2'][i]))==99
+        if i == 'ORF6':
+            assert len(set(gpvein['peri'][i]))==89
+            assert len(set(gpvein['peri2'][i]))==100
+        if i == 'ORF7a':
+            assert len(set(gpvein['peri'][i]))==90
+            assert len(set(gpvein['peri2'][i]))==97
+        if i == 'ORF8':
+            assert len(set(gpvein['peri'][i]))==93
+            assert len(set(gpvein['peri2'][i]))==99
+        if i == 'N':
+            assert len(set(gpvein['peri'][i]))==90
+            assert len(set(gpvein['peri2'][i]))==94
+        if i == 'ORF10':
+            assert len(set(gpvein['peri'][i]))==91
+            assert len(set(gpvein['peri2'][i]))==98    
+    assert len(set(gpvein['peri'][i]))==4
+    assert len(set(gpvein['peri2'][i]))==1      
 
 
 
