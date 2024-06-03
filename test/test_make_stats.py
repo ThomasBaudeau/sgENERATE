@@ -64,8 +64,8 @@ def test_nb_sgRNA():
         if i == 'ORF10':
             assert len(set(gpvein['peri'][i]))==91
             assert len(set(gpvein['peri2'][i]))==98    
-    assert len(set(gpvein['peri'][i]))==4
-    assert len(set(gpvein['peri2'][i]))==1      
+    assert len(set(gpvein['peri']['non_canonical']))==4
+    assert len(set(gpvein['peri2']['non_canonical']))==1      
 
 
 
