@@ -1,4 +1,4 @@
-from sgENERATE.recource.script.make_stats import found_read_peri,extract_csv_info
+from sgENERATE.resource.script.make_stats import found_read_peri,extract_csv_info
 import os
 
 resurep={'Ground_truth': [0, 100, 100, 100, 100, 100, 100, 100, 100, 0, 100, 0], 'Periscope': [0, 98, 98, 102, 96, 100, 98, 99, 95, 0, 98, 4], 'Periscope_multi': [0, 98, 98, 93, 99, 100, 97, 99, 94, 0, 98, 1]}
