@@ -1,7 +1,7 @@
 from sgENERATE.recource.script.make_stats import found_read_peri,extract_csv_info
 import os
 
-
+resurep={'Ground_truth': [0, 100, 100, 100, 100, 100, 100, 100, 100, 0, 100, 0], 'Periscope': [0, 98, 98, 102, 96, 100, 98, 99, 95, 0, 98, 4], 'Periscope_multi': [0, 98, 98, 93, 99, 100, 97, 99, 94, 0, 98, 1]}
 
 path= os.path.dirname(__file__)
 a=path+'/Periscope_test/'
@@ -30,6 +30,7 @@ def test_nb_read():
 
 def test_nb_sgRNA():
     TTkeys=[]
+    
     for i in gpvein['GT'].keys():
         if i == 'non_canonical' or i=='ORF1a' or i=='N*':
             assert len(set(gpvein['GT'][i]))==0
@@ -68,6 +69,13 @@ def test_nb_sgRNA():
     assert len(set(gpvein['peri2']['non_canonical']))==1      
 
 
+def test_result():
+    for i in range(len(result['Periscope'])):
+        assert result['Periscope'][i]==resurep['Periscope'][i]
+    for i in range(len(result['Periscope_multi'])):
+        assert result['Periscope_multi'][i]==resurep['Periscope_multi'][i]
+    for i in range(len(result['Ground_truth'])):
+        assert result['Ground_truth'][i]==resurep['Ground_truth'][i]
 
 #test_nb_sgRNA()
 
