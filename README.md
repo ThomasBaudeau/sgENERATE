@@ -1,6 +1,7 @@
 # sgENERATE
 
-Snakemake pipeline to generate ONT read with sgRNA mimicking ARTIC protocol and to compare sgRNA finding tools 
+Snakemake pipeline to generate ONT read with sgRNA mimicking ARTIC protocol and to compare sgRNA finding tools.
+see more information on the [sgENERATE documentation](https://thomasbaudeau.github.io/sgENERATE/)
 
 
 <h2>Install </h2>*
