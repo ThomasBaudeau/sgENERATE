@@ -48,8 +48,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#option">Option:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#other-option">Other option:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#option">Option:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#options-details">Options details:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-option">Other option:</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installing.html">Installing</a></li>
@@ -92,6 +95,15 @@
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> The help page in command line.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--coverage</span></code>. The coverage of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--coverage</span> <span class="pre">5000</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--error</span></code> The mean error rate of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--error</span> <span class="pre">0.95</span></code> (5% mean error rate) .</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--compare</span></code> Option to enable comparison between periscope and periscope_multi. The default value is <code class="docutils literal notranslate"><span class="pre">--compare</span> <span class="pre">True</span></code>.If the user only wants to generate a sample use <code class="docutils literal notranslate"><span class="pre">--false</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--real</span></code> Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is <code class="docutils literal notranslate"><span class="pre">--real</span> <span class="pre">False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--fastq</span></code> path to provided sample</p></li>
+</ul>
+<section id="options-details">
+<h3>Options details:<a class="headerlink" href="#options-details" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--coverage</span></code>. The coverage of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--coverage</span> <span class="pre">5000</span></code>.</p></li>
 </ul>
 <p>exemple :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">coverage</span> <span class="mi">1000</span>
@@ -110,10 +122,10 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Value are expected between and <strong>0.70</strong> <strong>0.96</strong>. The generation is based on pbsim2 and read better than 4% are not possible.</p>
+<p>Value are expected between <strong>0.70</strong> and  <strong>0.96</strong>. The generation is based on <a class="reference external" href="https://github.com/yukiteruono/pbsim2">pbsim2</a> and the method does not handle reads with an accurate greater than 4%.</p>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--compare</span></code> Option to enable comparison between periscope and periscope_multi. The default value is <code class="docutils literal notranslate"><span class="pre">--compare</span> <span class="pre">True</span></code>.If the user only want to generate a sample use –false</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--compare</span></code> Option to enable comparison between periscope and periscope_multi. The default value is <code class="docutils literal notranslate"><span class="pre">--compare</span> <span class="pre">True</span></code>.If the user only wants to generate a sample use –false</p></li>
 </ul>
 <p>exemple :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">compare</span> <span class="kc">False</span>
@@ -124,7 +136,7 @@
 <p>Value bigger than <strong>99</strong> expected</p>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--real</span></code> Option to enable comparison between periscope and periscope_multi on a provided dataset (holds up the generation of a generated samples). The default value is <code class="docutils literal notranslate"><span class="pre">--real</span> <span class="pre">False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--real</span></code> Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is <code class="docutils literal notranslate"><span class="pre">--real</span> <span class="pre">False</span></code></p></li>
 </ul>
 <p>exemple :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">real</span> <span class="kc">True</span>
@@ -132,7 +144,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The option <strong>must</strong> be used with <code class="docutils literal notranslate"><span class="pre">--fastq</span></code></p>
+<p>The option <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> <strong>must</strong> be used with <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> to indicate the path of the provided file</p>
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--fastq</span></code> path to provided sample</p></li>
@@ -143,20 +155,21 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The option <strong>must</strong> be used with <code class="docutils literal notranslate"><span class="pre">--real</span> <span class="pre">True</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> option <strong>must</strong> be used with <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> to indicate the path of the supplied file.</p>
 </div>
 </section>
 <section id="other-option">
-<h2>Other option:<a class="headerlink" href="#other-option" title="Link to this heading"></a></h2>
+<h3>Other option:<a class="headerlink" href="#other-option" title="Link to this heading"></a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>These options have been designed to allow further testing during the paper writing process. They will not be maintained in future developments and may no longer work.</p>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--tool</span></code> option to make the comparaison with other mapper for periscope_multi (graphmap, bwa-mem or minimap2 with refined parameters)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--technology</span></code> option to make the comparaison with other mapper on illumina data (illumina,ont)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--tool</span></code> option enabling the comparison with other mappers for periscope_multi (graphmap, bwa-mem or minimap2 with refined parameters)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--technology</span></code> option enabling the comparison with other mappers on illumina data (<code class="docutils literal notranslate"><span class="pre">--technology</span> <span class="pre">illumina</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--mode</span></code> option to extract all non canonical sgRNA in <code class="docutils literal notranslate"><span class="pre">result/non_COV_cano.fasta</span></code> use <code class="docutils literal notranslate"><span class="pre">--mode</span> <span class="pre">extraction</span></code></p></li>
 </ul>
+</section>
 </section>
 </section>
 

@@ -7,12 +7,23 @@ simple run : ::
 
    sgENERATE
    
+
 Option:
-~~~~~~~ 
+--------
 
 command option :
  
 * ``-h`` or ``--help`` The help page in command line.
+* ``--coverage``. The coverage of the generated sample. The default value is ``--coverage 5000``. 
+* ``--error`` The mean error rate of the generated sample. The default value is ``--error 0.95`` (5% mean error rate) .
+* ``--compare`` Option to enable comparison between periscope and periscope_multi. The default value is ``--compare True``.If the user only wants to generate a sample use ``--false`` 
+* ``--real`` Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is ``--real False``
+* ``--fastq`` path to provided sample 
+
+Options details:
+~~~~~~~~~~~~~~~~~  
+
+
 * ``--coverage``. The coverage of the generated sample. The default value is ``--coverage 5000``. 
 
 exemple : ::
@@ -31,10 +42,10 @@ exemple : ::
 
 .. NOTE::
 
-   Value are expected between and **0.70** **0.96**. The generation is based on pbsim2 and read better than 4% are not possible.
+   Value are expected between **0.70** and  **0.96**. The generation is based on `pbsim2 <https://github.com/yukiteruono/pbsim2>`_ and the method does not handle reads with an accurate greater than 4%.
 
 
-* ``--compare`` Option to enable comparison between periscope and periscope_multi. The default value is ``--compare True``.If the user only want to generate a sample use --false 
+* ``--compare`` Option to enable comparison between periscope and periscope_multi. The default value is ``--compare True``.If the user only wants to generate a sample use --false 
 
 exemple : ::
 
@@ -44,7 +55,7 @@ exemple : ::
 
    Value bigger than **99** expected
    
-* ``--real`` Option to enable comparison between periscope and periscope_multi on a provided dataset (holds up the generation of a generated samples). The default value is ``--real False``
+* ``--real`` Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is ``--real False``
 
 exemple : ::
 
@@ -52,7 +63,7 @@ exemple : ::
 
 .. NOTE::
 
-   The option **must** be used with ``--fastq``
+   The option ``--fastq`` **must** be used with ``--fastq`` to indicate the path of the provided file
 
    
 * ``--fastq`` path to provided sample 
@@ -63,7 +74,7 @@ exemple : ::
 
 .. NOTE::
 
-   The option **must** be used with ``--real True``
+   The ``--fastq`` option **must** be used with ``--fastq`` to indicate the path of the supplied file.
 
 
 Other option:
@@ -73,8 +84,8 @@ Other option:
 
    These options have been designed to allow further testing during the paper writing process. They will not be maintained in future developments and may no longer work.
 
-* ``--tool`` option to make the comparaison with other mapper for periscope_multi (graphmap, bwa-mem or minimap2 with refined parameters)
-* ``--technology`` option to make the comparaison with other mapper on illumina data (illumina,ont)
+* ``--tool`` option enabling the comparison with other mappers for periscope_multi (graphmap, bwa-mem or minimap2 with refined parameters)
+* ``--technology`` option enabling the comparison with other mappers on illumina data (``--technology illumina``)
 * ``--mode`` option to extract all non canonical sgRNA in ``result/non_COV_cano.fasta`` use ``--mode extraction``
 
 
