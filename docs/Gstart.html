@@ -48,9 +48,16 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-run">Quick run:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#option">Option:</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#options-details">Options details:</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#other-option">Other option:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#other-option">Other option:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">Output:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#periscope-folder">Periscope folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#periscope-multi-folder">Periscope_multi folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#result">result</a></li>
 </ul>
 </li>
 </ul>
@@ -85,10 +92,17 @@
   <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
 <p>For installation see <a class="reference external" href="https://thomasbaudeau.github.io/sgENERATE/installing.html">Installing</a> documentation.</p>
+<section id="quick-run">
+<h2>Quick run:<a class="headerlink" href="#quick-run" title="Link to this heading"></a></h2>
 <p>simple run :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span>
 </pre></div>
 </div>
+<p>quick run (low coverage) :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">coverage</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</section>
 <section id="option">
 <h2>Option:<a class="headerlink" href="#option" title="Link to this heading"></a></h2>
 <p>command option :</p>
@@ -158,8 +172,9 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> option <strong>must</strong> be used with <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> to indicate the path of the supplied file.</p>
 </div>
 </section>
+</section>
 <section id="other-option">
-<h3>Other option:<a class="headerlink" href="#other-option" title="Link to this heading"></a></h3>
+<h2>Other option:<a class="headerlink" href="#other-option" title="Link to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>These options have been designed to allow further testing during the paper writing process. They will not be maintained in future developments and may no longer work.</p>
@@ -168,6 +183,43 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">--tool</span></code> option enabling the comparison with other mappers for periscope_multi (graphmap, bwa-mem or minimap2 with refined parameters)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--technology</span></code> option enabling the comparison with other mappers on illumina data (<code class="docutils literal notranslate"><span class="pre">--technology</span> <span class="pre">illumina</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--mode</span></code> option to extract all non canonical sgRNA in <code class="docutils literal notranslate"><span class="pre">result/non_COV_cano.fasta</span></code> use <code class="docutils literal notranslate"><span class="pre">--mode</span> <span class="pre">extraction</span></code></p></li>
+</ul>
+</section>
+<section id="output">
+<h2>Output:<a class="headerlink" href="#output" title="Link to this heading"></a></h2>
+<p>Using sgENERATE results in the creation of 4 output folders.</p>
+<section id="periscope-folder">
+<h3>Periscope folder<a class="headerlink" href="#periscope-folder" title="Link to this heading"></a></h3>
+<p>This folder contains 3 files, all from the <a class="reference external" href="https://github.com/sheffield-bioinformatics-core/periscope">periscope</a> output files:</p>
+<ul class="simple">
+<li><p><strong>COV_periscope_counts.csv</strong> The counts of genomic, sub-genomic and normalisation values for known ORFs</p></li>
+<li><p><strong>COV_periscope_novel_counts.csv</strong> The counts of genomic, sub-genomic and normalisation values for non-canonical ORFs</p></li>
+<li><p><strong>COV_periscope.bam</strong> This is the original input bam file and index created by periscope with the reads specified in the fastq-dir. This file, however, has tags which represent the results of periscope</p></li>
+</ul>
+</section>
+<section id="periscope-multi-folder">
+<h3>Periscope_multi folder<a class="headerlink" href="#periscope-multi-folder" title="Link to this heading"></a></h3>
+<p>This folder contains 3 files, all from the <a class="reference external" href="https://github.com/ThomasBaudeau/periscope_multifasta">periscope_multifasta</a> output files:</p>
+<ul class="simple">
+<li><p><strong>COV_periscope_counts.csv</strong> The counts of genomic, sub-genomic and normalisation values for known ORFs</p></li>
+<li><p><strong>COV_periscope_novel_counts.csv</strong> The counts of genomic, sub-genomic and normalisation values for non-canonical ORFs</p></li>
+<li><p><strong>COV_periscope.bam</strong> This is the original input bam file and index created by periscope with the reads specified in the fastq-dir. This file, however, has tags which represent the results of periscope</p></li>
+</ul>
+</section>
+<section id="result">
+<h3>result<a class="headerlink" href="#result" title="Link to this heading"></a></h3>
+<p>This folder contains 2 folders and 5 files.</p>
+<ul class="simple">
+<li><p><strong>COV_nbread.txt</strong> file containing the number of reads generated</p></li>
+<li><p><strong>COV_multifastq.faa</strong> files of possible generated amplicons</p></li>
+<li><p><strong>final_COV_agregate.fastq</strong> fastq files of the sample generated by pbsim2</p></li>
+<li><p><strong>final_COV_proportion.txt</strong> files containing information on the number of sgRNAs present in the generated samples</p></li>
+<li><p><strong>final_COV_SG_ER.pdf</strong> Figure summarizing the results of the two tools, contains a barplot and a veen diagram.</p></li>
+</ul>
+<p>For the forlders:</p>
+<ul class="simple">
+<li><p><strong>pbsim2 folder</strong> contains a fastq file for each amplicon generated</p></li>
+<li><p><strong>sg_ref_COV folder</strong> contains fasta files for each possible sgRNA</p></li>
 </ul>
 </section>
 </section>
