@@ -69,9 +69,9 @@ def extract_csv_info(file1,file1mult,file2,filenovel,filenovelmult,nb,file3=None
     for lign in f1[1:]:
         l=lign.split(',')
         if LLQ:
-            sgcount[l[1]]=[int(l[5])+int(l[6]),0,0]#
+            sgcount[l[1]]=[int(l[5])+int(l[6])+int(l[7]),0,0]#
         else:
-            sgcount[l[1]]=[int(l[5])+int(l[6])+int(l[7]),0,0]
+            sgcount[l[1]]=[int(l[5])+int(l[6]),0,0]
         gpvein['GT'][l[1]]=[]
     gpvein['GT']['non_canonical']=[]
     for lign in f1p[1:]:

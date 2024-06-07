@@ -6,6 +6,7 @@ def main(linput,filename,outone,outtwo,param):
     nbread=0
     sgname=find_same_ampli(filename)
     sgpath={}
+    alea=True
     for path in linput:
         f=open(path,'r').readlines()
         num=int(f[0].split('_')[0][2:])
@@ -15,12 +16,17 @@ def main(linput,filename,outone,outtwo,param):
             else:
                  sgpath[sgname[num]]=[path]
         else:
-            rd=random.randint(int(param*0.8),int(param*0.9))
-            nbread+=rd
+            
+            if alea:
+                rd=random.randint(int(param*0.8),int(param*0.9))
+                nbread+=rd
+            else:
+                rd=param
+                nbread+=rd
             for nb in range(rd):
                 finalfile.write(''.join(e for e in f[nb*4:((nb*4)+4)]))
                 
-    lis=define_proportion(sgpath,nbread)
+    lis=define_proportion(sgpath,nbread,alea)
     print(lis)
     for item in lis:
         nbitem=len(item[0])
@@ -45,7 +51,7 @@ def find_same_ampli(path):
 
 
 
-def define_proportion(linput,nbread,alea=True):
+def define_proportion(linput,nbread,alea):
     tpnb=list(linput.keys())
     nb=int(nbread*0.01)
     print(nb,nbread)
