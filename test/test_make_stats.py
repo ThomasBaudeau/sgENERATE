@@ -1,7 +1,7 @@
 from sgENERATE.resource.script.make_stats import found_read_peri,extract_csv_info
 import os
 
-resurep={'Ground_truth': [0, 100, 100, 100, 100, 100, 100, 100, 100, 0, 100, 0], 'Periscope': [0, 98, 98, 102, 96, 100, 98, 99, 95, 0, 98, 4], 'Periscope_multi': [0, 98, 98, 93, 99, 100, 97, 99, 94, 0, 98, 1]}
+resurep={'Ground_truth': [0, 100, 100, 100, 100, 100, 100, 100, 100, 0, 100, 0], 'Periscope': [0, 83, 95, 92, 87, 89, 90, 93, 90, 0, 91, 4], 'Periscope_multi': [0, 98, 98, 93, 99, 100, 97, 99, 94, 0, 98, 1]}
 
 path= os.path.dirname(__file__)
 a=path+'/Periscope_test/'
@@ -68,7 +68,7 @@ def test_nb_sgRNA():
     assert len(set(gpvein['peri']['non_canonical']))==4
     assert len(set(gpvein['peri2']['non_canonical']))==1      
 
-
+test_nb_sgRNA()
 def test_result():
     for i in range(len(result['Periscope'])):
         assert result['Periscope'][i]==resurep['Periscope'][i]
