@@ -1,11 +1,11 @@
 # sgENERATE
 
-Snakemake pipeline to generate ONT read with sgRNA mimicking ARTIC protocol and to compare sgRNA finding tools.
+A Snakemake pipeline to generate ONT reads with sgRNA mimicking the ARTIC protocol and to compare sgRNA finding tools.
 
-more information on the [sgENERATE documentation](https://thomasbaudeau.github.io/sgENERATE/)
+More information on the [sgENERATE documentation](https://thomasbaudeau.github.io/sgENERATE/)
 
 
-<h2>Install </h2>*
+<h2>Installation</h2>*
 
 
 **Requirement**
@@ -14,9 +14,9 @@ more information on the [sgENERATE documentation](https://thomasbaudeau.github.i
 * [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) <br> 
 
 
-**Installation**
+**Installation Steps**
 
-Clone the repository:
+Clone the repository and set up the environment:
 
 <pre>
 git clone https://github.com/ThomasBaudeau/sgENERATE <br> 
@@ -29,9 +29,10 @@ pip install .
 
 
 
-## How to start with sgENERATE :
+## Getting Started with sgENERATE
 
-The different Tool implemented are :
+
+The tools implemented are:
 
   * [Periscope](https://github.com/sheffield-bioinformatics-core/periscope)
   * [Periscope_multi](https://github.com/ThomasBaudeau/periscope_multifasta)
@@ -41,6 +42,6 @@ The different Tool implemented are :
  ### sgENERATE Usage:
  <pre>
 --coverage (default 5000)
---error mean error rate of the generated samples (default 0.95 i.e 5% error)
---compare  if true don't run the benchmark and only make the data generation (default false) 
+--error mean error rate of the generated samples (default 0.95, i.e., 5% error)
+--compare if true, don't run the benchmark and only generate the data (default false)
 </pre>
