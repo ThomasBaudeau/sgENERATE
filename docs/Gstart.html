@@ -49,7 +49,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#quick-run">Quick run:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#option">Option:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#options">Options:</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#options-details">Options details:</a></li>
 </ul>
 </li>
@@ -91,7 +91,7 @@
              
   <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
-<p>For installation see <a class="reference external" href="https://thomasbaudeau.github.io/sgENERATE/installing.html">Installing</a> documentation.</p>
+<p>For installation see the <a class="reference external" href="https://thomasbaudeau.github.io/sgENERATE/installing.html">Installing</a> documentation.</p>
 <section id="quick-run">
 <h2>Quick run:<a class="headerlink" href="#quick-run" title="Link to this heading"></a></h2>
 <p>simple run :</p>
@@ -103,45 +103,45 @@
 </pre></div>
 </div>
 </section>
-<section id="option">
-<h2>Option:<a class="headerlink" href="#option" title="Link to this heading"></a></h2>
-<p>command option :</p>
+<section id="options">
+<h2>Options:<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<p>command options :</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> The help page in command line.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>  Display the help page in the command line.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--coverage</span></code>. The coverage of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--coverage</span> <span class="pre">5000</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--error</span></code> The mean error rate of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--error</span> <span class="pre">0.95</span></code> (5% mean error rate) .</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--compare</span></code> Option to enable comparison between periscope and periscope_multi. The default value is <code class="docutils literal notranslate"><span class="pre">--compare</span> <span class="pre">True</span></code>.If the user only wants to generate a sample use <code class="docutils literal notranslate"><span class="pre">--false</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--real</span></code> Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is <code class="docutils literal notranslate"><span class="pre">--real</span> <span class="pre">False</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--fastq</span></code> path to provided sample</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--error</span></code> The mean error rate of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--error</span> <span class="pre">0.95</span></code> (5% mean error rate).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--compare</span></code> Option to enable comparison between periscope and periscope_multi. The default value is <code class="docutils literal notranslate"><span class="pre">--compare</span> <span class="pre">True</span></code>.If the user only wants to generate a sample use <code class="docutils literal notranslate"><span class="pre">--false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--real</span></code> Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is <code class="docutils literal notranslate"><span class="pre">--real</span> <span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--fastq</span></code> path to the provided sample.</p></li>
 </ul>
 <section id="options-details">
 <h3>Options details:<a class="headerlink" href="#options-details" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--coverage</span></code>. The coverage of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--coverage</span> <span class="pre">5000</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--coverage</span></code>: The coverage of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--coverage</span> <span class="pre">5000</span></code>.</p></li>
 </ul>
-<p>exemple :</p>
+<p>Example :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">coverage</span> <span class="mi">1000</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Value bigger than <strong>99</strong> expected</p>
+<p>Value greater than <strong>99</strong> is expected</p>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--error</span></code> The mean error rate of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--error</span> <span class="pre">0.95</span></code> (5% mean error rate) .</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--error</span></code>: The mean error rate of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--error</span> <span class="pre">0.95</span></code> (5% mean error rate) .</p></li>
 </ul>
-<p>exemple :</p>
+<p>Example :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">error</span> <span class="mf">0.85</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Value are expected between <strong>0.70</strong> and  <strong>0.96</strong>. The generation is based on <a class="reference external" href="https://github.com/yukiteruono/pbsim2">pbsim2</a> and the method does not handle reads with an accurate greater than 4%.</p>
+<p>Value are expected between <strong>0.70</strong> and  <strong>0.96</strong>. The generation is based on <a class="reference external" href="https://github.com/yukiteruono/pbsim2">pbsim2</a> and the method does not handle reads with an accuracy greater than 4%.</p>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--compare</span></code> Option to enable comparison between periscope and periscope_multi. The default value is <code class="docutils literal notranslate"><span class="pre">--compare</span> <span class="pre">True</span></code>.If the user only wants to generate a sample use –false</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--compare</span></code> : Enable comparison between periscope and periscope_multi. The default value is <code class="docutils literal notranslate"><span class="pre">--compare</span> <span class="pre">True</span></code>.If the user only wants to generate a sample, use –false</p></li>
 </ul>
-<p>exemple :</p>
+<p>Example :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">compare</span> <span class="kc">False</span>
 </pre></div>
 </div>
@@ -150,26 +150,26 @@
 <p>Value bigger than <strong>99</strong> expected</p>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--real</span></code> Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is <code class="docutils literal notranslate"><span class="pre">--real</span> <span class="pre">False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--real</span></code>: Enable comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is <code class="docutils literal notranslate"><span class="pre">--real</span> <span class="pre">False</span></code></p></li>
 </ul>
-<p>exemple :</p>
+<p>Example :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">real</span> <span class="kc">True</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The option <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> <strong>must</strong> be used with <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> to indicate the path of the provided file</p>
+<p>The option <code class="docutils literal notranslate"><span class="pre">--real</span></code> <strong>must</strong> be used with <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> to indicate the path of the provided file</p>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--fastq</span></code> path to provided sample</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--fastq</span></code>: path to the provided sample</p></li>
 </ul>
-<p>exemple :</p>
+<p>Example :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">fastq</span> <span class="n">PATH</span><span class="o">/</span><span class="n">tofile</span><span class="o">.</span><span class="n">fastq</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> option <strong>must</strong> be used with <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> to indicate the path of the supplied file.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--fastq</span></code> option <strong>must</strong> be used with <code class="docutils literal notranslate"><span class="pre">--real</span></code>.</p>
 </div>
 </section>
 </section>
@@ -177,7 +177,7 @@
 <h2>Other option:<a class="headerlink" href="#other-option" title="Link to this heading"></a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>These options have been designed to allow further testing during the paper writing process. They will not be maintained in future developments and may no longer work.</p>
+<p>These options are designed for further testing during the paper writing process. They will not be maintained in future developments and may no longer work.</p>
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--tool</span></code> option enabling the comparison with other mappers for periscope_multi (graphmap, bwa-mem or minimap2 with refined parameters)</p></li>
@@ -208,7 +208,7 @@
 </section>
 <section id="result">
 <h3>result<a class="headerlink" href="#result" title="Link to this heading"></a></h3>
-<p>This folder contains 2 folders and 5 files.</p>
+<p>This folder contains 2 subfolders and 5 files.</p>
 <ul class="simple">
 <li><p><strong>COV_nbread.txt</strong> file containing the number of reads generated</p></li>
 <li><p><strong>COV_multifastq.faa</strong> files of possible generated amplicons</p></li>
@@ -216,7 +216,7 @@
 <li><p><strong>final_COV_proportion.txt</strong> files containing information on the number of sgRNAs present in the generated samples</p></li>
 <li><p><strong>final_COV_SG_ER.pdf</strong> Figure summarizing the results of the two tools, contains a barplot and a veen diagram.</p></li>
 </ul>
-<p>For the forlders:</p>
+<p>For the subforlders:</p>
 <ul class="simple">
 <li><p><strong>pbsim2 folder</strong> contains a fastq file for each amplicon generated</p></li>
 <li><p><strong>sg_ref_COV folder</strong> contains fasta files for each possible sgRNA</p></li>

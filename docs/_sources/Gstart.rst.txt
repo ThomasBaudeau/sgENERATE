@@ -1,7 +1,7 @@
 Getting Started
 ================
 
-For installation see `Installing <https://thomasbaudeau.github.io/sgENERATE/installing.html>`_ documentation.
+For installation see the `Installing <https://thomasbaudeau.github.io/sgENERATE/installing.html>`_ documentation.
 
 Quick run:
 ~~~~~~~~~~~
@@ -15,46 +15,46 @@ quick run (low coverage) : ::
 
    sgENERATE --coverage 100 
 
-Option:
+Options:
 ~~~~~~~~~~~~~~~ 
 
-command option :
+command options :
  
-* ``-h`` or ``--help`` The help page in command line.
+* ``-h`` or ``--help``  Display the help page in the command line.
 * ``--coverage``. The coverage of the generated sample. The default value is ``--coverage 5000``. 
-* ``--error`` The mean error rate of the generated sample. The default value is ``--error 0.95`` (5% mean error rate) .
-* ``--compare`` Option to enable comparison between periscope and periscope_multi. The default value is ``--compare True``.If the user only wants to generate a sample use ``--false`` 
-* ``--real`` Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is ``--real False``
-* ``--fastq`` path to provided sample 
+* ``--error`` The mean error rate of the generated sample. The default value is ``--error 0.95`` (5% mean error rate).
+* ``--compare`` Option to enable comparison between periscope and periscope_multi. The default value is ``--compare True``.If the user only wants to generate a sample use ``--false``. 
+* ``--real`` Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is ``--real False``.
+* ``--fastq`` path to the provided sample. 
 
 Options details:
 ------------------
 
 
-* ``--coverage``. The coverage of the generated sample. The default value is ``--coverage 5000``. 
+* ``--coverage``: The coverage of the generated sample. The default value is ``--coverage 5000``. 
 
-exemple : ::
+Example : ::
 
    sgENERATE --coverage 1000 
 
 .. NOTE::
 
-   Value bigger than **99** expected
+   Value greater than **99** is expected
 
-* ``--error`` The mean error rate of the generated sample. The default value is ``--error 0.95`` (5% mean error rate) . 
+* ``--error``: The mean error rate of the generated sample. The default value is ``--error 0.95`` (5% mean error rate) . 
 
-exemple : ::
+Example : ::
 
    sgENERATE --error 0.85
 
 .. NOTE::
 
-   Value are expected between **0.70** and  **0.96**. The generation is based on `pbsim2 <https://github.com/yukiteruono/pbsim2>`_ and the method does not handle reads with an accurate greater than 4%.
+   Value are expected between **0.70** and  **0.96**. The generation is based on `pbsim2 <https://github.com/yukiteruono/pbsim2>`_ and the method does not handle reads with an accuracy greater than 4%.
 
 
-* ``--compare`` Option to enable comparison between periscope and periscope_multi. The default value is ``--compare True``.If the user only wants to generate a sample use --false 
+* ``--compare`` : Enable comparison between periscope and periscope_multi. The default value is ``--compare True``.If the user only wants to generate a sample, use --false 
 
-exemple : ::
+Example : ::
 
    sgENERATE --compare False
 
@@ -62,26 +62,26 @@ exemple : ::
 
    Value bigger than **99** expected
    
-* ``--real`` Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is ``--real False``
+* ``--real``: Enable comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is ``--real False``
 
-exemple : ::
+Example : ::
 
    sgENERATE --real True
 
 .. NOTE::
 
-   The option ``--fastq`` **must** be used with ``--fastq`` to indicate the path of the provided file
+   The option ``--real`` **must** be used with ``--fastq`` to indicate the path of the provided file
 
    
-* ``--fastq`` path to provided sample 
+* ``--fastq``: path to the provided sample 
 
-exemple : ::
+Example : ::
 
    sgENERATE --fastq PATH/tofile.fastq
 
 .. NOTE::
 
-   The ``--fastq`` option **must** be used with ``--fastq`` to indicate the path of the supplied file.
+   The ``--fastq`` option **must** be used with ``--real``.
 
 
 Other option:
@@ -89,7 +89,7 @@ Other option:
 
 .. WARNING::
 
-   These options have been designed to allow further testing during the paper writing process. They will not be maintained in future developments and may no longer work.
+   These options are designed for further testing during the paper writing process. They will not be maintained in future developments and may no longer work.
 
 * ``--tool`` option enabling the comparison with other mappers for periscope_multi (graphmap, bwa-mem or minimap2 with refined parameters)
 * ``--technology`` option enabling the comparison with other mappers on illumina data (``--technology illumina``)
@@ -122,7 +122,7 @@ This folder contains 3 files, all from the `periscope_multifasta <https://github
 result
 -------
 
-This folder contains 2 folders and 5 files.
+This folder contains 2 subfolders and 5 files.
 
 *  **COV_nbread.txt** file containing the number of reads generated
 *  **COV_multifastq.faa** files of possible generated amplicons 
@@ -130,7 +130,7 @@ This folder contains 2 folders and 5 files.
 *  **final_COV_proportion.txt** files containing information on the number of sgRNAs present in the generated samples
 *  **final_COV_SG_ER.pdf** Figure summarizing the results of the two tools, contains a barplot and a veen diagram.
 
-For the forlders:
+For the subforlders:
 
 *  **pbsim2 folder** contains a fastq file for each amplicon generated 
 *  **sg_ref_COV folder** contains fasta files for each possible sgRNA

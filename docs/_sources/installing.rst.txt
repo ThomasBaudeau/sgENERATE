@@ -6,7 +6,7 @@ Installing From Github
 
 .. WARNING::
 
-   conda installation is required priori to installing sgENERATE
+   conda installation is required prior to installing sgENERATE
    see: `Conda documentation <https://conda.io/projects/conda/en/latest/user-guide/install/index.html>`_
 
 Clone the repository: ::
