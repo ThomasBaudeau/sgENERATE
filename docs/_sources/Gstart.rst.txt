@@ -23,7 +23,7 @@ command options :
 * ``-h`` or ``--help``  Display the help page in the command line.
 * ``--coverage``. The coverage of the generated sample. The default value is ``--coverage 5000``. 
 * ``--error`` The mean error rate of the generated sample. The default value is ``--error 0.95`` (5% mean error rate).
-* ``--compare`` Option to enable comparison between periscope and periscope_multi. The default value is ``--compare True``.If the user only wants to generate a sample use ``--false``. 
+* ``--no-compare`` option to disable tool comparison. 
 * ``--real`` Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is ``--real False``.
 * ``--fastq`` path to the provided sample. 
 
@@ -52,15 +52,12 @@ Example : ::
    Value are expected between **0.70** and  **0.96**. The generation is based on `pbsim2 <https://github.com/yukiteruono/pbsim2>`_ and the method does not handle reads with an accuracy greater than 4%.
 
 
-* ``--compare`` : Enable comparison between periscope and periscope_multi. The default value is ``--compare True``.If the user only wants to generate a sample, use --false 
+* ``--no-compare`` : Disable comparison between periscope and periscope_multi.If the user only wants to generate a sample, use this option. 
 
 Example : ::
 
-   sgENERATE --compare False
+   sgENERATE --no-compare
 
-.. NOTE::
-
-   Value bigger than **99** expected
    
 * ``--real``: Enable comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is ``--real False``
 

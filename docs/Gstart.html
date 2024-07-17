@@ -110,7 +110,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>  Display the help page in the command line.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--coverage</span></code>. The coverage of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--coverage</span> <span class="pre">5000</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--error</span></code> The mean error rate of the generated sample. The default value is <code class="docutils literal notranslate"><span class="pre">--error</span> <span class="pre">0.95</span></code> (5% mean error rate).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--compare</span></code> Option to enable comparison between periscope and periscope_multi. The default value is <code class="docutils literal notranslate"><span class="pre">--compare</span> <span class="pre">True</span></code>.If the user only wants to generate a sample use <code class="docutils literal notranslate"><span class="pre">--false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-compare</span></code> option to disable tool comparison.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--real</span></code> Option to enable the comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is <code class="docutils literal notranslate"><span class="pre">--real</span> <span class="pre">False</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--fastq</span></code> path to the provided sample.</p></li>
 </ul>
@@ -139,15 +139,11 @@
 <p>Value are expected between <strong>0.70</strong> and  <strong>0.96</strong>. The generation is based on <a class="reference external" href="https://github.com/yukiteruono/pbsim2">pbsim2</a> and the method does not handle reads with an accuracy greater than 4%.</p>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--compare</span></code> : Enable comparison between periscope and periscope_multi. The default value is <code class="docutils literal notranslate"><span class="pre">--compare</span> <span class="pre">True</span></code>.If the user only wants to generate a sample, use –false</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-compare</span></code> : Disable comparison between periscope and periscope_multi.If the user only wants to generate a sample, use this option.</p></li>
 </ul>
 <p>Example :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">compare</span> <span class="kc">False</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sgENERATE</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">compare</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Value bigger than <strong>99</strong> expected</p>
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--real</span></code>: Enable comparison between periscope and periscope_multi on a provided dataset (does not generate a synthetic dataset). The default value is <code class="docutils literal notranslate"><span class="pre">--real</span> <span class="pre">False</span></code></p></li>
