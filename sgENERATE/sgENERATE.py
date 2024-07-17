@@ -9,14 +9,16 @@ def main():
 
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,description='sgENERATE: a tool to create ARTIC like nanopore data and compare sgRNA finding tools',usage='''periscope [options]''')
     parser.add_argument('--coverage',dest='cov', help='Coverage of the generated samples', default=5000,required=False)
-    parser.add_argument('--error',dest='er' ,help='Mean error rate of the generated samples (default 0.95, i.e., 5% error)',default=0.95,required=False)
+    parser.add_argument('--error',dest='er' ,help='Mean error rate of the generated samples (default 0.95, i.e., 5 percent error)',default=0.95,required=False)
     parser.add_argument('--real',dest='real',help='Location of the fastq file to be used for tools benchmarking',required=False,default=False)
-    parser.add_argument('--compare',dest='comp', help='Run comparison (default True, use false if only dataset generation is desired)',default='True',required=False)
+    parser.add_argument('--compare',dest='comp',help='Run comparison',action='store_true',required=False)
+    parser.add_argument('--no-compare',dest='comp', help='Default False, use it if only dataset generation is desired',action='store_false',required=False)
     parser.add_argument('--tool',dest='tool', help='Advanced option: see online documentation for more information',default='minimap',required=False)
     #parser.add_argument('--artic-primers', dest='artic_primers', help='artic network primer version used:\n* V1 (default), V2, V3, V4\n* 2kb (for the UCL longer amplicons)\n* midnight (1.2kb midnight amplicons)\n* for custom primers provide path to amplicons file first and primers file second', nargs='*', default="V3")
     parser.add_argument('--technology', help='the sequencing technology used, either:\n*ont\n*illumina', default="ont")
     parser.add_argument('--fastq',dest='fastq',help='if you already have a single fastq then you can use this flag instead, if illumina paired end separate fastq by space', nargs='+',required=False,default=['result/final_{species}_agregate.fastq'])
     parser.add_argument('--mode',dest='mode',help='use --mode extraction for extract all the non-canonical sgRNA',required=False,default=False)
+    parser.set_defaults(comp=True)
     args = parser.parse_args()
 
 
