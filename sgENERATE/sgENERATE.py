@@ -11,7 +11,6 @@ def main():
     parser.add_argument('--coverage',dest='cov', help='Coverage of the generated samples', default=5000,required=False)
     parser.add_argument('--error',dest='er' ,help='Mean error rate of the generated samples (default 0.95, i.e., 5 percent error)',default=0.95,required=False)
     parser.add_argument('--real',dest='real',help='Location of the fastq file to be used for tools benchmarking',required=False,default=False)
-    parser.add_argument('--compare',dest='comp',help='Run comparison',action='store_true',required=False)
     parser.add_argument('--no-compare',dest='comp', help='Default False, use it if only dataset generation is desired',action='store_false',required=False)
     parser.add_argument('--tool',dest='tool', help='Advanced option: see online documentation for more information',default='minimap',required=False)
     #parser.add_argument('--artic-primers', dest='artic_primers', help='artic network primer version used:\n* V1 (default), V2, V3, V4\n* 2kb (for the UCL longer amplicons)\n* midnight (1.2kb midnight amplicons)\n* for custom primers provide path to amplicons file first and primers file second', nargs='*', default="V3")
