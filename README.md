@@ -43,7 +43,7 @@ The tools implemented are:
 
 Simply run `sgENERATE` from the command line to both simulate an ARTIC sgRNA dataset and execute a benchmark between currently available tools (periscope and periscope_multi).
 
-To only simulate data, execute `sgENERATE --compare False`
+To only simulate data, execute `sgENERATE --no-compare`
 
  ### sgENERATE parameters
 
