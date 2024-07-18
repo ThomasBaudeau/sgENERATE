@@ -7,7 +7,7 @@ import logging
 
 def main():
 
-    parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,description='sgENERATE: a tool to create ARTIC like nanopore data and compare sgRNA finding tools',usage='''periscope [options]''')
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,description='sgENERATE: a tool to create ARTIC like nanopore data and compare sgRNA finding tools',usage='''sgENERATE [options]''')
     parser.add_argument('--coverage',dest='cov', help='Coverage of the generated samples', default=5000,required=False)
     parser.add_argument('--error',dest='er' ,help='Mean error rate of the generated samples (default 0.95, i.e., 5 percent error)',default=0.95,required=False)
     parser.add_argument('--real',dest='real',help='Location of the fastq file to be used for tools benchmarking',required=False,default=False)
