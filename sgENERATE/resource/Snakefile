@@ -115,7 +115,7 @@ if not REAL:
         params:
             tool=config.get('tool'),
             tech=config.get('tech'),
-            artic=config.get('artic_primers')
+            artic=config.get('artic_primers'),
             gff=config.get('gff')
         benchmark:
             "benchmarks/PeriscopeMult_{species}.txt"
@@ -130,7 +130,7 @@ if not REAL:
             'Periscope/{species}_periscope.bam'
         params:
             tech=config.get('tech'),
-            artic=config.get('artic_primers')
+            artic=config.get('artic_primers'),
         conda:
             'env/peri.yaml'
         benchmark:
@@ -167,6 +167,8 @@ if REAL:
         params:
             tool=config.get('tool'),
             tech=config.get('tech'),
+            artic=config.get('artic_primers'),
+            gff=config.get('gff'),
         benchmark:
             "benchmarks/PeriscopeMult_{species}.txt"
         shell:
@@ -188,7 +190,8 @@ if REAL:
                 'Periscope/{species}_periscope_novel_counts.csv',
                 
             params:
-                tech=config.get('tech')
+                tech=config.get('tech'),
+                artic=config.get('artic_primers')
             conda:
                 'env/peri.yaml'
             benchmark:
@@ -248,7 +251,8 @@ if REAL:
                 'Periscope/{species}_periscope_novel_counts.csv',
                 'Periscope/{species}_periscope.bam'
             params:
-                tech=config.get('tech')
+                tech=config.get('tech'),
+                artic=config.get('artic_primers')
             conda:
                 'env/peri.yaml'
             benchmark:
