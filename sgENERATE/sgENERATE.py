@@ -29,7 +29,7 @@ def main():
 
 
     # run snakemake pipeline 1st
-
+    args = parser.parse_args()
 
     config = dict(
         NB=args.cov,
