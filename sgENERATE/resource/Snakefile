@@ -10,7 +10,8 @@ AMPLICON=config.get('AMPLICON')
 species=config.get('fna')
 artic_primers=config.get('artic_primers')
 
-
+print(AMPLICON)
+print(species)
 if MODE=='extraction':
     rule all:
         input:
