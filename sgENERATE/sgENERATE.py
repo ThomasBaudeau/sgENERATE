@@ -5,6 +5,10 @@ import snakemake
 import glob
 import logging
 
+
+dir = os.path.join(os.path.dirname(__file__))
+scripts_dir= os.path.join(dir, 'resource')
+
 def main():
 
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,description='sgENERATE: a tool to create ARTIC like nanopore data and compare sgRNA finding tools',usage='''periscope [options]''')
@@ -13,17 +17,19 @@ def main():
     parser.add_argument('--real',dest='real',help='Location of the fastq file to be used for tools benchmarking',required=False,default=False)
     parser.add_argument('--no-compare',dest='comp', help='Default False, use it if only dataset generation is desired',action='store_false',required=False)
     parser.add_argument('--tool',dest='tool', help='Advanced option: see online documentation for more information',default='minimap',required=False)
-    #parser.add_argument('--artic-primers', dest='artic_primers', help='artic network primer version used:\n* V1 (default), V2, V3, V4\n* 2kb (for the UCL longer amplicons)\n* midnight (1.2kb midnight amplicons)\n* for custom primers provide path to amplicons file first and primers file second', nargs='*', default="V3")
+    parser.add_argument('--artic-primers', dest='artic_primers', help='artic network primer version used:\n* V1 (default), V2, V3, V4\n* 2kb (for the UCL longer amplicons)\n* midnight (1.2kb midnight amplicons)\n* for custom primers provide path to amplicons file first and primers file second', nargs='*', default="V3")
     parser.add_argument('--technology', help='the sequencing technology used, either:\n*ont\n*illumina', default="ont")
     parser.add_argument('--fastq',dest='fastq',help='if you already have a single fastq then you can use this flag instead, if illumina paired end separate fastq by space', nargs='+',required=False,default=['result/final_{species}_agregate.fastq'])
     parser.add_argument('--mode',dest='mode',help='use --mode extraction for extract all the non-canonical sgRNA',required=False,default=False)
+    parser.add_argument('--amplicon',dest='AMPLICON',help='amplicon file path ',required=False,default=scripts_dir+'/'+"resource/data/amplicon/artic_amplicons_V3.bed")
+    parser.add_argument('--fna',dest='fna',help='path to a specific species files. The files must be called COV_ref.fna',required=False,default=scripts_dir+'/'+"data/ref/COV_ref.fna")
+    parser.add_argument('--gff',dest='gff',help='gff file for periscope multi',required=False,default=scripts_dir+'/'+"script/covid.gff")
     parser.set_defaults(comp=True)
-    args = parser.parse_args()
+    parser.add_argument()
 
 
     # run snakemake pipeline 1st
-    dir = os.path.join(os.path.dirname(__file__))
-    scripts_dir= os.path.join(dir, 'resource')
+
 
     config = dict(
         NB=args.cov,
@@ -34,7 +40,11 @@ def main():
         path=scripts_dir,
         tech=args.technology,
         fastq=args.fastq,
-        mode=args.mode
+        mode=args.mode,
+        AMPLICON=args.AMPLICON,
+        species=args.fna,
+        artic_primers=args.artic_primers,
+        gff=args.gff
     )
 
     print(config)

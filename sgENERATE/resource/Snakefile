@@ -6,6 +6,9 @@ REAL=config.get('REAL')
 ER=config.get('ER')
 COMP=config.get('COMP')
 MODE=config.get('mode')
+AMPLICON=config.get('AMPLICON')
+species=config.get('fna')
+artic_primers=config.get('artic_primers')
 
 
 if MODE=='extraction':
@@ -45,8 +48,8 @@ checkpoint generate_sgref:
 
 rule generate_amplicon:
     input:
-        ref=path+"data/ref/{species}_ref.fna",
-        ampli=path+"data/amplicon/artic_amplicons_V3.bed",
+        ref=species,
+        ampli=AMPLICON,
         c=get_checkpoint_sg
     output:
         'result/{species}_multifastq.faa'
@@ -112,10 +115,12 @@ if not REAL:
         params:
             tool=config.get('tool'),
             tech=config.get('tech'),
+            artic=config.get('artic_primers')
+            gff=config.get('gff')
         benchmark:
             "benchmarks/PeriscopeMult_{species}.txt"
         shell:
-            "periscope_multi --fastq {input} --tool {params.tool} --technology {params.tech} --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm -f Periscope_mult/COV.*"
+            "periscope_multi --fastq {input} --tool {params.tool} --technology {params.tech} --gff {params.gff} --technology ont --artic-primers {params.artic} --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm -f Periscope_mult/COV.*"
     rule periscope:
         input:
             'result/final_{species}_agregate.fastq'
@@ -124,14 +129,15 @@ if not REAL:
             'Periscope/{species}_periscope_novel_counts.csv',
             'Periscope/{species}_periscope.bam'
         params:
-            tech=config.get('tech')
+            tech=config.get('tech'),
+            artic=config.get('artic_primers')
         conda:
             'env/peri.yaml'
         benchmark:
             "benchmarks/Periscope_{species}.txt"
         shell:
             """
-            periscope --fastq {input} --technology {params.tech} --artic-primers V3 --output-prefix {wildcards.species} --threads 18;
+            periscope --fastq {input} --technology {params.tech} --artic-primers {params.artic} --output-prefix {wildcards.species} --threads 18;
             mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
             mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
             mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
@@ -164,7 +170,7 @@ if REAL:
         benchmark:
             "benchmarks/PeriscopeMult_{species}.txt"
         shell:
-            "periscope_multi --fastq {input.fastq} --tool {params.tool}  --gff "+path+"script/covid.gff --technology ont --artic-primers V3 --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm -f Periscope_mult/COV.*"
+            "periscope_multi --fastq {input.fastq} --tool {params.tool}  --gff {params.gff} --technology ont --artic-primers {params.artic} --output-prefix Periscope_mult/{wildcards.species} --threads 18;rm -f Periscope_mult/COV.*"
 
     
 
@@ -189,7 +195,7 @@ if REAL:
                 "benchmarks/Periscope_{species}.txt"
             shell:
                 """
-                periscope --fastq {input.fastq} --technology {params.tech} --artic-primers V3 --output-prefix {wildcards.species} --threads 18;
+                periscope --fastq {input.fastq} --technology {params.tech} --artic-primers {params.artic} --output-prefix {wildcards.species} --threads 18;
                 mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
                 mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
                 mv {wildcards.species}.bam {wildcards.species}_resulttt.bam
@@ -249,7 +255,7 @@ if REAL:
                 "benchmarks/Periscope_{species}.txt"
             shell:
                 """
-                periscope --fastq {input.fastq} --technology {params.tech} --artic-primers V3 --output-prefix {wildcards.species} --threads 18;
+                periscope --fastq {input.fastq} --technology {params.tech} --artic-primers {params.artic} --output-prefix {wildcards.species} --threads 18;
                 mv {wildcards.species}_periscope_counts.csv Periscope/{wildcards.species}_periscope_counts.csv;
                 mv {wildcards.species}_periscope_novel_counts.csv Periscope/{wildcards.species}_periscope_novel_counts.csv
                 mv {wildcards.species}_periscope.bam Periscope/{wildcards.species}_periscope.bam
