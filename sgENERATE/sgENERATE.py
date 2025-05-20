@@ -25,7 +25,6 @@ def main():
     parser.add_argument('--fna',dest='fna',help='path to a specific species files. The files must be called COV_ref.fna',required=False,default=scripts_dir+'/'+"data/ref/COV_ref.fna")
     parser.add_argument('--gff',dest='gff',help='gff file for periscope multi',required=False,default=scripts_dir+'/'+"script/covid.gff")
     parser.set_defaults(comp=True)
-    parser.add_argument()
 
 
     # run snakemake pipeline 1st
