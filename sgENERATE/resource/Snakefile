@@ -7,7 +7,7 @@ ER=config.get('ER')
 COMP=config.get('COMP')
 MODE=config.get('mode')
 AMPLICON=config.get('AMPLICON')
-species=config.get('fna')
+species=config.get('species')
 artic_primers=config.get('artic_primers')
 
 print(AMPLICON)

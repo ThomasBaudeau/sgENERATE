@@ -21,7 +21,7 @@ def main():
     parser.add_argument('--technology', help='the sequencing technology used, either:\n*ont\n*illumina', default="ont")
     parser.add_argument('--fastq',dest='fastq',help='if you already have a single fastq then you can use this flag instead, if illumina paired end separate fastq by space', nargs='+',required=False,default=['result/final_{species}_agregate.fastq'])
     parser.add_argument('--mode',dest='mode',help='use --mode extraction for extract all the non-canonical sgRNA',required=False,default=False)
-    parser.add_argument('--amplicon',dest='AMPLICON',help='amplicon file path ',required=False,default=scripts_dir+'/'+"resource/data/amplicon/artic_amplicons_V3.bed")
+    parser.add_argument('--amplicon',dest='AMPLICON',help='amplicon file path ',required=False,default=scripts_dir+'/'+"data/amplicon/artic_amplicons_V3.bed")
     parser.add_argument('--fna',dest='fna',help='path to a specific species files. The files must be called COV_ref.fna',required=False,default=scripts_dir+'/'+"data/ref/COV_ref.fna")
     parser.add_argument('--gff',dest='gff',help='gff file for periscope multi',required=False,default=scripts_dir+'/'+"script/covid.gff")
     parser.set_defaults(comp=True)
@@ -46,10 +46,8 @@ def main():
         gff=args.gff
     )
 
-    print(config)
 
     snakefile = os.path.join(scripts_dir, 'Snakefile')
-    print(snakefile)
     if not os.path.exists(snakefile):
         sys.stderr.write('Error: cannot find Snakefile at {}\n'.format(snakefile))
         sys.exit(-1)
